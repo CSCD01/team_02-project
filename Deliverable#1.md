@@ -18,9 +18,9 @@ Django is a framework built on python. We examined the source code of this produ
 
 <hr />
 
-<p>
+<center>
   <img width="50%" height="50%" src="./pic/Django_life_cycle.png">
-</p>
+</center>
 
 
 
