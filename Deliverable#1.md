@@ -149,9 +149,9 @@ Decorator Pattern is also used in the implementation. Something interesting is t
 Adopting the same idea to functional-oriented programming, this is ideal when you want to dynamically extend the functionality of a function without needing to modify the function, and python allows you to do this. The condition checks in this project were done in a flow, as shown in the below sequence diagram.
 
 <center>
-    <img width="49%" height="49%" src="./pic/decorator_sd.png" >
-    <img width="49%" height="49%" src="./pic/login_required.png">
+    <img src="./pic/sqd.jpg" >
 </center>
+
 
 <center>
   <em>The left one is the general diagram, the right one is login_required sequence diagram</em>
