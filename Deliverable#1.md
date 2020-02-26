@@ -1,8 +1,6 @@
-# CSCDO1 PROJECT DELIVERABLE 1
+#CSCDO1 PROJECT DELIVERABLE 1
 
 ### by Team Anti-CoronaVirus
-
-
 
 
 
@@ -20,9 +18,10 @@ Django is a framework built on python. We examined the source code of this produ
 
 <hr />
 
-<center>
+<p>
   <img width="50%" height="50%" src="./pic/Django_life_cycle.png">
-</center>
+</p>
+
 
 
 
@@ -42,6 +41,7 @@ When we examine the whole code base, we saw that “addons-server/src/Olympia”
 <p float="left">
   <img src="./pic/uml.jpg">
 </p>
+
 
 
 
@@ -151,13 +151,15 @@ Decorator Pattern is also used in the implementation. Something interesting is t
 Adopting the same idea to functional-oriented programming, this is ideal when you want to dynamically extend the functionality of a function without needing to modify the function, and python allows you to do this. The condition checks in this project were done in a flow, as shown in the below sequence diagram.
 
 <center>
-    <img src="./pic/sqd.jpg" >
+    <img width="49%" height="49%" src="./pic/decorator_sd.png" >
+    <img width="49%" height="49%" src="./pic/login_required.png">
 </center>
 
 
 <center>
   <em>The left one is the general diagram, the right one is login_required sequence diagram</em>
 </center>
+
 
 In the project, there is a file called `decorator.py`, which contains all decorators used in amo module. These decorators are intended to be used for condition checking or data mapping. 
 
@@ -223,15 +225,26 @@ Moreover, we are not adopting the scrum method because we do not want to stick t
 
 #### Why Kanban?
 
-Hence, the Kanban method stands out. It follows a set of principles and practices for managing and improving the flow of work. More specifically, for our team and our chosen project, it is an evolutionary, non-disruptive method that promotes gradual improvements to our project. Since we did not design and implement our project from scratch, we have to learn this project as we go and look into the potential issues and locate them in the source code and then try to come up with a solution for the issues. As a result, following Kanban’s principle:
+Hence, the Kanban method stands out. It follows a set of principles and practices for managing and improving the flow of work. More specifically, for our team and our chosen project, it is an evolutionary, non-disruptive method that promotes gradual improvements to our project. Since we did not design and implement the project from scratch, we have to learn this project as we go and look into the potential issues and locate them in the source code and then try to come up with a solution for the issues. As a result, following Kanban’s principle:
 
 - We start with what we are doing now, such as getting familiar with the overall architecture, sorting out the relationship between each component, and providing a higher-level diagram to show the structure of the system
 - Agree to pursue incremental, evolutionary change such as we are going to make small incremental change rather than making radical changes because we need to gain more confidence as we play around each segment of codes piece by piece
 - Initially, respect current roles, responsibilities, and job titles. Because we all know each other well before this project, and we respect each other and know each other’s strengths, we will collaboratively identify and implement any changes needed
 - Encourage acts of leadership at all levels. Since we all know each other’s strengths, and there is no obvious senior talented member in our team, anyone in the team can provide ideas and show leadership to implement changes to improve the way we deliver our project continually
 
-#### What Tools we choose?
+#### How about our Kanban process?
 
-Above all else, the Kanban board on Github allows us to make custom columns for how our team works, other than traditional common workflow stages such as To Do, In Progress, In Review and Done. My team will modify the columns into Backlog, Selected for Development, In Progress, Technical Review and Done. In terms of release methodology, updates are released whenever they are ready, without a regular schedule or predetermined due dates like sprint review. 
+Above all else, the Kanban board on [Trello](https://trello.com/b/tX6AbRV4/addon-server) allows us to make custom columns for how our team works, other than traditional common workflow stages such as To Do, In Progress, In Review, and Done. Our team will have six columns: 
 
-Since the whole team will have access to the Kanban board, unlike scrum, there is no single “scrum master” who keeps everything running smoothly. It’s the collective responsibility of the entire team to collaborate on and deliver the tasks on the board. Besides, the WIP limit will cap the number of cards that can be in any one column at one time. When one of the members reaches the WIP limit, a tool like Github (which we are going to use) caps that column and the team will swarm on those items to move them forward. Lastly, because of the nature of our chosen project, we will need to add or remove our cards to and from the board frequently, all makes it possible in Kanban workflow.
+- **Todo **displays either unassigned tasks  that whoever is free could pickup a task to work on, or tasks that requires to rework
+
+- **Work in Progress** displays all tasks that team members are currently working on, each task that is placed in this column will clearly state who is responsible for the task. Once a team member finished the task, he/she would have to self test the code before the task is moved to the next column.
+
+- **First Code Review** displays all tasks finish the implementation. Team members should review the overall quality of the code, and this stage could expose some potential problems, improvements, or even better solutions to the task. After one team member has reviewed it, the task can be moved to the **Second Code review** column. Otherwise, the reviewer should move the task back to the **Todo** Column with the task assigned to the one who implemented it, and the issue owner should pick up the task from **Todo** once he/she is free.
+- **Second Code Review** is the step of double-checking. Since different people may have a different view or idea of the task, a different team member other than the one who does the first code review should check on the work again if this team member agrees with the opinion from the first reviewer. Then the task could be moved to the next column and wait for a QA test. If a rework is necessary, the task should be moved to **Todo**, as we stated in **First Code Review**.
+- **QA Testing** holds all tasks that require a QA test. However, since our team does not specifically have a QA engineer who is only responsible for QA testing, every team member could pick up a task in this column and do the testing. At this stage, if a test failed, the tester should move the task from this column back to the **Todo** column, such that the corresponding team member could rework on the task.
+- **Done** displays all closed task, all the task that are placed in this column could not be reopened. However, if rework on the same task is nessacary, a new task that has different description should be genearted to the **Todo** column.
+
+We noticed that there could be a different type of tasks. For instance, some tasks require actual implementation, but some may not, such a task could skip the code review part and jump directly to QA testing once it is finished.
+
+Kanban is forcing each team member to focus on a small set of the task at one time. By following a kanban working process, each member should only be assigned at most **two** tasks at the same time.
