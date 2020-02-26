@@ -1,5 +1,4 @@
-#CSCDO1 PROJECT DELIVERABLE 1
-
+# CSCDO1 PROJECT DELIVERABLE 1
 ### by Team Anti-CoronaVirus
 
 
@@ -236,7 +235,7 @@ Hence, the Kanban method stands out. It follows a set of principles and practice
 
 Above all else, the Kanban board on [Trello](https://trello.com/b/tX6AbRV4/addon-server) allows us to make custom columns for how our team works, other than traditional common workflow stages such as To Do, In Progress, In Review, and Done. Our team will have six columns: 
 
-- **Todo **displays either unassigned tasks  that whoever is free could pickup a task to work on, or tasks that requires to rework
+- **Todo** displays either unassigned tasks  that whoever is free could pickup a task to work on, or tasks that requires to rework
 
 - **Work in Progress** displays all tasks that team members are currently working on, each task that is placed in this column will clearly state who is responsible for the task. Once a team member finished the task, he/she would have to self test the code before the task is moved to the next column.
 
