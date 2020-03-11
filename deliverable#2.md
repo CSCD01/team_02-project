@@ -46,7 +46,7 @@ In `src/olympia/addons/serializers.py`:
 
 In `src/olympia/addons/tests/test_serializers.py`:
 
-![](/Users/samuel/IdeaProjects/team_02-project/pic/diff_test_serializer.png)
+![](./pic/diff_test_serializer.png)
 
 ##### **Test:** 
 
