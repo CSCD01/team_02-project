@@ -3,13 +3,22 @@
 # CSCD01 PROJECT DELIVERABLE#2
 
 ## **Table of Contents**
-1. [Steps To Run Local Build Of Mozilla Addons Server](#build)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-4. [Fourth Example](#process)
+1. **[Steps To Run Local Build Of Mozilla Addons Server](#build)**
+2. **[Five Issues Investigatioin Reports](#report)**
+   1. [Issue 12842](#report1)
+   2. [Issue 12790](#report2)
+   3. [Issue 13508](#report3)
+   4. [Issue 13200](#report4)
+   5. [Issue 8262](#report5)
+3. **[Issue Decision Arguments](#decision)**
+4. **[Three Fixed Issues](#fixed)**
+   1. [Issue 8262 Fixing Details](#fixed1)
+   2. [Issue 12842 Fixing Details](#fixed2)
+   3. [Issue 13508 Fixing Details](#fixed3)
+5. **[Software Development Process](#process)**
 
-
-## **Steps To Run Local Build Of Mozilla Addons Server** <a name="build"></a>
+<a name="build"></a>
+## **Steps To Run Local Build Of Mozilla Addons Server**
 
 1. Clone code base from [team_02 repo]( https://github.com/CSCD01/addons-server-team02 )
 2. Go into addons-server-team02 directory
@@ -22,9 +31,10 @@
 9. Open Firefox and go to `127.0.0.1:3000`
 
 
-
+<a name="report"></a>
 ## **Five Issues Investigation Reports**
 
+<a name="report1"></a>
 ####  1. Issue12842 [Drop is_source_public property from Addon model](https://github.com/mozilla/addons-server/issues/12842)
 
 ##### **The problem:**
@@ -70,7 +80,7 @@ Test result on Branch:
 
 
 
-
+<a name="report2"></a>
 #### 2. Issue 12790 [Validate line number in draft comments API](https://github.com/mozilla/addons-server/issues/12790 )
 
 ##### **The problem:**
@@ -108,7 +118,7 @@ http://localhost:3000/api/v4/reviewers/addon/{addon_id}/versions/{version_id}/dr
 4. In unit test suite, when a draft comment create with a valid lineo in the body is received, check the response status, it should be 201, and the comment should be created.
 
 
-
+<a name="report3"></a>
 #### **3. Issue #13508 [Deleting a group fails](https://github.com/mozilla/addons-server/issues/13508)**
 
 The reason that we choose this issue to fix is because this 'Group function’ is common to admins who want to add new groups and attach users to certain groups and of course if no use, delete the groups. Besides, the issue is obvious and it is easy to understand and to trace the source code to get the logic of the code.
@@ -242,7 +252,7 @@ Unit Test:
 Existing unit tests are executed after fixing. No new errors has been prompted.
 
 
-
+<a name="report4"></a>
 #### **4. Issue #13200 [Admin tools - Log out results into a 500 server error](https://github.com/mozilla/addons-server/issues/13200)**
 
 ##### **The problem:**
@@ -284,7 +294,7 @@ def test_django_admin_logout(self):
 So the whole working progress needs at least 5 days or more.
 
 
-
+<a name="report5"></a>
 #### **5. Issue #8262 ["More Actions" is too far down on the review page](https://github.com/mozilla/addons-server/issues/8262)**
 
 ##### **The problem:**
@@ -319,7 +329,7 @@ Note: The original issue and its reproducing steps are shown below:
 About one day to get familiar with templates, CSS files, and .js files, which would be involved in this change. Approximately one more day for the actual changing and testing. We probably need to spend one or two more days if automated UI testing is required because we do not have any experience with automatic UI testing.
 
 
-
+<a name="decision"></a>
 ## **Issue Decision Arguments**
 
 With the five issues that we have investigated, we ordered them by their estimated amount of work, potential risks, and expected difficulties. These issues took each of us several days to investigate. When we had the meeting for deciding which issues we would finally try to fix, we have around five days left before the due date.
@@ -333,9 +343,10 @@ Considering about the difficulties, issue #8262 and #12842 are relatively easy. 
 Combining the facts of estimated amount of work, potential risks, and expected difficulties, we come to an agreement that we would be able to finish all of these three issues on time.
 
 
+<a name="fixed"></a>
+## **Three Fixed Issues**
 
-## **Fixed Issues**
-
+<a name="fixed1"></a>
 ### **1. Issue #8262 in Details**
 
 #### **Changed Parts**
@@ -375,7 +386,7 @@ The changes above will only affect the whiteboard and private whiteboard. No oth
 6. Test different acceptance test cases on the page by saving and deleting the contents on the two boards
 
 
-
+<a name="fixed2"></a>
 ### **2. Issue #12842 in Details**
 
 #### The problem
@@ -408,19 +419,20 @@ Technically we could not design an acceptance test to test an unused property. I
 3. Compare the test result for master and the branch
 
 
-
+<a name="fixed3"></a>
 ### **3. Issue #13508 in Details**
 
 #### The problem
 
 After logging as Admin, and creating a new group with users inside, but then can't delete the group.
 #### Changed Parts
+Under branch [13508_Deleting_a_group_fails_D01]( https://github.com/CSCD01/addons-server-team02/tree/13508_Deleting_a_group_fails_D01 )
 
  `./src/olympia/activity/migrations/0005_added_ondelete_cascade.py`
 
   added a custom migration file named “0005_added_ondelete_cascade”
 
- 
+
 #### How Changes Affect The Project
 
 As running the new migration file to mysql database from Django, the group with users can be deleted successfully without error.
