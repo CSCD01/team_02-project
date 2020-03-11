@@ -339,7 +339,7 @@ Combining the facts of estimated amount of work, potential risks, and expected d
 
   Added textarea:empty for default empty style
 
-1. `static/js/zamboni/reviewers.js`
+2. `static/js/zamboni/reviewers.js`
 
 Added click listener for whiteboard and private whiteboard in order to have expanding functionalities for these two boards. Also added click listener for elements other than the two boards in order to collapse back.
 
