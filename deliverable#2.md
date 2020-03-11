@@ -461,8 +461,10 @@ User Acceptance test:
 <a name="process"></a>
 ## Software Development Process
 
+Our **[Kanban Board]( https://trello.com/b/tX6AbRV4/addon-server )**
+
 During the working process of deliverable2, we used the Kanban board as our tool. We designed the board (refer to d1) with 6 columns, which included todo, in progress, code review1, code review2, QA testing, and done. The new tasks that needed to be done were placed in “to do.” Once a person picked up a task from “to do,” he/she assigned his/her name on that card and then switched the card into the next column “in progress.” However, when one of us selected the card in other columns, he/she assigned his/her name directly. After finishing one task, we unassigned our name on it and then moved it to the next block. Our rule was that one team member’s name could only appear twice at the same time(one is “in progress,” the other is in the blocks which are not “in progress”).
 
-
+![](./pic/trello_kanban_d2.png)
 
 Actually, we did meet some problems when using our kanban board. The way that we chose to treat with issue spikes is not clear at the early time. Some of us thought that once we finished the assigned spike, the task card could be moved into the “done” column directly since there is no need to do a code review and also QA Testing. However, this defeated the purpose of using a kanban board and might let other members confuse. Then, we agreed on a solution to handle these spikes in a meeting. Since everyone had a report of his/her spike, we decided to consider a code review column as a column for proofreading as well as QA testing as a grammar check. Finally, we solved this problem and strictly followed our rules for the whole process in deliverable2.
