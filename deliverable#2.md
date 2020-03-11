@@ -403,6 +403,42 @@ Technically we could not design an acceptance test to test an unused property. I
 
 
 
+### **3. Issue #13508 in Details**
+
+#### The problem
+
+After logging as Admin, and creating a new group with users inside, but then can't delete the group.
+#### Changed Parts
+
+ `./src/olympia/activity/migrations/0005_added_ondelete_cascade.py`
+
+  added a custom migration file named “0005_added_ondelete_cascade”
+
+ 
+#### How Changes Affect The Project
+
+As running the new migration file to mysql database from Django, the group with users can be deleted successfully without error.
+
+#### Acceptance Test Criterias
+
+1. When creating a group with no users included, and then deleted it. -- no errors since this was working originally.
+2. When creating a group with 1 user included, and then deleted. -- no errors and the group was deleted successfully.
+3. When creating a group with multiple users(2-3) included, and then deleted. -- no errors and the group was deleted successfully.
+
+#### Steps to Test
+Unit test:
+1. Refer to **Steps To Run Local Build Of Mozilla Addons Server** if this is the first time of running local build
+2. Performed test `python manage.py test src/olympia/access`
+3. Performed test `python manage.py test src/olympia/activity`
+4. Compare the test result for master and the branch
+
+User Acceptance test:
+
+5. After login as Admin, go to localhost:3000/admin/models/ or http://olympia.test/en-US/admin/models/, inside ACCESS>Groups.
+6. Create a user group by clicking on ADD GROUP
+7. Add some user/users to it and save the group
+8. Try to delete the group and confirm the deletion
+
 
 
 ## Software Development Process
