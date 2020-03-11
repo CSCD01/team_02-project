@@ -2,9 +2,14 @@
 
 # CSCD01 PROJECT DELIVERABLE#2
 
+## **Table of Contents**
+1. [Steps To Run Local Build Of Mozilla Addons Server](#build)
+2. [Example2](#example2)
+3. [Third Example](#third-example)
+4. [Fourth Example](#process)
 
 
-### Steps To Run Local Build Of Mozilla Addons Server
+## **Steps To Run Local Build Of Mozilla Addons Server** <a name="build"></a>
 
 1. Clone code base from [team_02 repo]( https://github.com/CSCD01/addons-server-team02 )
 2. Go into addons-server-team02 directory
@@ -18,27 +23,27 @@
 
 
 
-## **Five Issues**
+## **Five Issues Investigation Reports**
 
 ####  1. Issue12842 [Drop is_source_public property from Addon model](https://github.com/mozilla/addons-server/issues/12842)
 
-##### **The problem:** 
+##### **The problem:**
 
-Due to the security reason, the authors of the Add-on server wanted to remove the link to the source code from the product page, such that prevent users to access the source code from Mozilla, instead the contributors should publish the source code on external sites like Github. However, after they’ve removed the View Source link, the property `is_source_public` left in `./src/olympia/addons/serializers.py` became unused and should be removed as well. 
+Due to the security reason, the authors of the Add-on server wanted to remove the link to the source code from the product page, such that prevent users to access the source code from Mozilla, instead the contributors should publish the source code on external sites like Github. However, after they’ve removed the View Source link, the property `is_source_public` left in `./src/olympia/addons/serializers.py` became unused and should be removed as well.
 
 ##### **Investigation:**
 
  The property appears in the two files:` ./addons/serializers.py` and `./addons/test/test_serializers.py`. We need to remove the property from these two files.
 
-##### **Estimate amount of work:** 
+##### **Estimate amount of work:**
 
 1 day to examine the code base, and determine which files to modify. 1 day to implement the fix.
 
-##### **Fixing plan:** 
+##### **Fixing plan:**
 
 Have the is_source_public property removed from serializer.py
 
-##### **Files to change:** 
+##### **Files to change:**
 
 In `src/olympia/addons/serializers.py`:
 
@@ -48,7 +53,7 @@ In `src/olympia/addons/tests/test_serializers.py`:
 
 ![](./pic/diff_test_serializer.png)
 
-##### **Test:** 
+##### **Test:**
 
 After this property is deleted, run the modified `test_serializer.py` to make sure the removal of is_source_public property in serializer.py does not affect the functionality of the code. Moreover, we test the whole `./olympia/addons` to make sure the modification does not introduce new errors.
 
@@ -70,7 +75,7 @@ Test result on Branch:
 
 ##### **The problem:**
 
-All addons that are submitted to upload and publish by users are required to be reviewed and approved by reviewers. When a reviewer reviews a specific version of an addon, the reviewers can create a draft comment on a line of the addon source file, which is sent through API: 
+All addons that are submitted to upload and publish by users are required to be reviewed and approved by reviewers. When a reviewer reviews a specific version of an addon, the reviewers can create a draft comment on a line of the addon source file, which is sent through API:
 
 ```
 POST /api/v4/reviewers/addon/(*int: addon_id*)/versions/(*int:version_id*)/draft_comments/
@@ -80,13 +85,13 @@ The body of this API call includes a field: `lineo`, it’s the line number that
 
 ##### **Investigation:**
 
-Since we are unable to upload our example addons to the local server, it’s hard to reproduce the problem exactly like the issue description. Although we can reproduce the issue by creating new test cases, it is still different to the problem at production and development environments. Also, we found that this issue is also related to the repo Mozilla Code Manage, which is a separate repo and app. To fix and continue investigating this issue, we need to set up both addons-server and code-manager on our local machine, which may take a long time(at least a few days to properly set up the environment). 
+Since we are unable to upload our example addons to the local server, it’s hard to reproduce the problem exactly like the issue description. Although we can reproduce the issue by creating new test cases, it is still different to the problem at production and development environments. Also, we found that this issue is also related to the repo Mozilla Code Manage, which is a separate repo and app. To fix and continue investigating this issue, we need to set up both addons-server and code-manager on our local machine, which may take a long time(at least a few days to properly set up the environment).
 
 ##### **Estimate amount of work:**
 
 3 - 5days to set up addons-server and code-manager on our local machine, 2 days to get familiar with both two code bases regarding the issue portion. Extra 2 days to design and implement the fix, and 1 days to design and implement unit tests and acceptance tests.
 
-##### **Test Scenario:** 
+##### **Test Scenario:**
 
 ```
 command:curl -X POST \
@@ -104,7 +109,7 @@ http://localhost:3000/api/v4/reviewers/addon/{addon_id}/versions/{version_id}/dr
 
 
 
-#### **3. Issue #13508 [Deleting a group fails](https://github.com/mozilla/addons-server/issues/13508)** 
+#### **3. Issue #13508 [Deleting a group fails](https://github.com/mozilla/addons-server/issues/13508)**
 
 The reason that we choose this issue to fix is because this 'Group function’ is common to admins who want to add new groups and attach users to certain groups and of course if no use, delete the groups. Besides, the issue is obvious and it is easy to understand and to trace the source code to get the logic of the code.
 
@@ -123,7 +128,7 @@ The webpage generates an error: '*Cannot delete or update a parent row: a foreig
 'Cannot delete or update a parent row: a foreign key constraint fails (`olympia`.`log_activity_group`, CONSTRAINT `log_activity_group_group_id_e03ab8c8_fk_groups_id` FOREIGN KEY (`group_id`) REFERENCES `groups` (`id`))'
 ```
 
-##### **Investigation and Fixing plan**: 
+##### **Investigation and Fixing plan**:
 
 There are two tables related to this error: `groups`, `log_activity_group`. And their relations are shown as follows:
 
@@ -132,7 +137,7 @@ There are two tables related to this error: `groups`, `log_activity_group`. And 
 #### In this scenario, when we try to delete a row in the parent table `groups`, the other table `log_activity_group` prohibits this action due to foreign key constraints. (we need to delete the row in the children table first in order to delete the row in the parent table) Unless we explicitly state the “**on delete cascade**” condition.
 
 
-After carefully looking into the source code of the apps “access”, “activity” and mysql database of the project. We found that the ORM (object relational mapping) in Django is coding correctly with foreign key fields having `on_delete=models.CASCADE` conditions in **activity-**>**models.py**. 
+After carefully looking into the source code of the apps “access”, “activity” and mysql database of the project. We found that the ORM (object relational mapping) in Django is coding correctly with foreign key fields having `on_delete=models.CASCADE` conditions in **activity-**>**models.py**.
 
 ```python
 class Group(ModelBase):
@@ -165,13 +170,13 @@ class GroupLog(ModelBase):
         ordering = ('-created',)
 ```
 
-However, when Django makes migrations in the “activity” app to the mysql database, even though Django states `on_delete=models.CASCADE` condition, somehow this was not captured in mysql. As a result, it gave this error. 
+However, when Django makes migrations in the “activity” app to the mysql database, even though Django states `on_delete=models.CASCADE` condition, somehow this was not captured in mysql. As a result, it gave this error.
 
-##### **Estimate amount of work:** 
+##### **Estimate amount of work:**
 
 1.5 days to get familiar with the code base regarding the issue portion. Another 3 days to learn ORM, how migration and custom migration work in Django.
 
-##### **Fixing plan**: 
+##### **Fixing plan**:
 
 I have to execute a custom SQL in Django migration in order to make sure mysql includes `on delete cascade` condition in the foreign key constraint in table `log_activity_group`. Below are the steps I performed to the fix:
 
@@ -185,30 +190,30 @@ I have to execute a custom SQL in Django migration in order to make sure mysql i
 
    ```python
    from django.db import migrations
-   
-   
+
+
    class Migration(migrations.Migration):
-   
+
        dependencies = [
            ('activity', '0004_auto_20191125_1659'),
        ]
-   
+
        operations = [
            migrations.RunSQL(
                "alter table log_activity_group drop foreign key log_activity_group_group_id_e03ab8c8_fk_groups_id",
                "alter table log_activity_group add foreign key (group_id) references groups(id) on DELETE CASCADE"
            )
        ]
-   
+
    ```
 
-   
+
 
 5. Type `python manage.py migrate activity` to run the migration.
 
 6. Done
 
-   
+
 
 ##### **Potential risk of not correctly fixed:**
 
@@ -259,7 +264,7 @@ The original issue and its reproducing steps are shown below:
 5. Click the button “LOG OUT” at the right top side
 6. Have a look of the redirected URL
 
-##### **Investigation** **and** **Fixing plan:** 
+##### **Investigation** **and** **Fixing plan:**
 
 From my investigation, I found that the source code of the amo admin page is located on src/olympia/zadmin. During the inspection on urls.py and view.py, there does not exist an URL and implemented a function for logout, which means that when we click the logout button to reach http://olympia.test/en-CA/admin/models/logout, it called the Django admin build-in log out function. Since the build-in function will redirect the web page to its root '/,' it is reasonable that it jumps to the original add-ons page([http://](http://localhost:3000/en-CA/firefox/)[olympia.test](http://olympia.test/en-CA/admin/)[/en-CA/firefox](http://localhost:3000/en-CA/firefox/)/). What we want is that we could override the method and redirect the URL to 'zadmin.home' which could be written as `redirect(reverse('admin:index'))`
 
@@ -267,7 +272,7 @@ The problem is that we cannot override the logout method in urls.py and view.py 
 
 ##### **Estimate amount of work:**
 
-As I mentioned above, if we use the second way to fix it, we need to figure out how the page generates these `<a>` tags on the website. Even though we know that these are built by Django templates, there are a lot of different design choices made by the developers, which make the source codes, unlike the standard templates. I have already spent two days of investigation. The rest of the work is to find how the buttons are generated by format_html and which part of the templates should be modified. That may take 2-3 days of work. Furthermore, the time for implementing new codes might be 2-3 days. Besides, the part of testing may only cost about 1 day because we could base on existing test cases for example 
+As I mentioned above, if we use the second way to fix it, we need to figure out how the page generates these `<a>` tags on the website. Even though we know that these are built by Django templates, there are a lot of different design choices made by the developers, which make the source codes, unlike the standard templates. I have already spent two days of investigation. The rest of the work is to find how the buttons are generated by format_html and which part of the templates should be modified. That may take 2-3 days of work. Furthermore, the time for implementing new codes might be 2-3 days. Besides, the part of testing may only cost about 1 day because we could base on existing test cases for example
 
 ```python
 def test_django_admin_logout(self):
@@ -284,7 +289,7 @@ So the whole working progress needs at least 5 days or more.
 
 ##### **The problem:**
 
-On Reviewer Tools, there are two commenting sections called “Whiteboard” and “Private Whiteboard.” Both of them are located in the middle of the page vertically. Usually, there is no or only one line of comment on each of these two sections. There is another section called “More Actions” following the two boards. The problem is that users find even if there are few or even no content on these two boards, the two boards are still 200px in height for each, which could fit in about 10 lines of contents. The fact is that the functionalities wrapped in the “More Actions” section are more frequently used than these two boards. Users feel cumbersome if they want to use the functionalities under the “More Actions” section. 
+On Reviewer Tools, there are two commenting sections called “Whiteboard” and “Private Whiteboard.” Both of them are located in the middle of the page vertically. Usually, there is no or only one line of comment on each of these two sections. There is another section called “More Actions” following the two boards. The problem is that users find even if there are few or even no content on these two boards, the two boards are still 200px in height for each, which could fit in about 10 lines of contents. The fact is that the functionalities wrapped in the “More Actions” section are more frequently used than these two boards. Users feel cumbersome if they want to use the functionalities under the “More Actions” section.
 
 Note: The original issue and its reproducing steps are shown below:
 
@@ -301,11 +306,11 @@ Note: The original issue and its reproducing steps are shown below:
 
 ##### **Fixing plan:**
 
-1. Firstly, we need to recreate the issue on Firefox. 
+1. Firstly, we need to recreate the issue on Firefox.
 2. Then, we should use the Inspect Element tool to help us locate the template which produces the Reviewer Tools page.
 3. With the correct template file and Inspect Element tool, we can then target the CSS files that control the style of the whiteboard and whiteboard private elements on the web page.
 4. In the CSS file, add a new default style (collapsed height) for empty boards. (`<id>:empty{}`)
-5. After editing the CSS file, the .js files that are imported to the template file need to be located with the help of the Inspect Element tool as well. 
+5. After editing the CSS file, the .js files that are imported to the template file need to be located with the help of the Inspect Element tool as well.
 6. With the .js file, we would then need to find the correct js file that can be used to insert new js-related functionalities (adjusting textarea height based on different clicking actions).
 7. The last step is to fix the js-related functionalities in order to get everything fixed.
 
@@ -317,13 +322,13 @@ About one day to get familiar with templates, CSS files, and .js files, which wo
 
 ## **Issue Decision Arguments**
 
-With the five issues that we have investigated, we ordered them by their estimated amount of work, potential risks, and expected difficulties. These issues took each of us several days to investigate. When we had the meeting for deciding which issues we would finally try to fix, we have around five days left before the due date. 
+With the five issues that we have investigated, we ordered them by their estimated amount of work, potential risks, and expected difficulties. These issues took each of us several days to investigate. When we had the meeting for deciding which issues we would finally try to fix, we have around five days left before the due date.
 
-Considering about the estimated amount of work, issue #12790 and #13200 would take at least five days. Thus, these two issues were removed from the candidate list automatically. 
+Considering about the estimated amount of work, issue #12790 and #13200 would take at least five days. Thus, these two issues were removed from the candidate list automatically.
 
-Since issue #8262 is mainly about JS and CSS fixing for elements on templates, the risk of fixing the issue but breaking other parts is very low. Meanwhile, issue #12842 is about removing properties no longer needed. So, issue #12842 may have relatively low risk of breaking working parts as well. For issue #13508, the group deleting functionalities involve several database tables. The risk of this issue would be the potential relation-breaking of these involved tables. Thus, the risk of this issue is relatively higher than the other two issues mentioned before. 
+Since issue #8262 is mainly about JS and CSS fixing for elements on templates, the risk of fixing the issue but breaking other parts is very low. Meanwhile, issue #12842 is about removing properties no longer needed. So, issue #12842 may have relatively low risk of breaking working parts as well. For issue #13508, the group deleting functionalities involve several database tables. The risk of this issue would be the potential relation-breaking of these involved tables. Thus, the risk of this issue is relatively higher than the other two issues mentioned before.
 
-Considering about the difficulties, issue #8262 and #12842 are relatively easy. The difficulty of issue #13508 is higher than those two but still a fair one to fix. 
+Considering about the difficulties, issue #8262 and #12842 are relatively easy. The difficulty of issue #13508 is higher than those two but still a fair one to fix.
 
 Combining the facts of estimated amount of work, potential risks, and expected difficulties, we come to an agreement that we would be able to finish all of these three issues on time.
 
@@ -334,7 +339,7 @@ Combining the facts of estimated amount of work, potential risks, and expected d
 ### **1. Issue #8262 in Details**
 
 #### **Changed Parts**
-
+Under branch [8262-review_page_whiteboard_fix]( https://github.com/CSCD01/addons-server-team02/tree/8262-review_page_whiteboard_fix )
 1. `static/css/zamboni/reviewers.less`
 
   Added textarea:empty for default empty style
@@ -375,9 +380,10 @@ The changes above will only affect the whiteboard and private whiteboard. No oth
 
 #### The problem
 
-Due to the security reason, the authors of the Add-on server wanted to remove the link to the source code from the product page, such that prevent users to access the source code from Mozilla, instead the contributors should publish the source code on external sites like Github. However, after they’ve removed the View Source link, the property is_source_public left in ./src/olympia/addons/serializers.py became unused and should be removed as well. 
+Due to the security reason, the authors of the Add-on server wanted to remove the link to the source code from the product page, such that prevent users to access the source code from Mozilla, instead the contributors should publish the source code on external sites like Github. However, after they’ve removed the View Source link, the property is_source_public left in ./src/olympia/addons/serializers.py became unused and should be removed as well.
 
 #### Changed Parts
+Under branch [12842-drop-is_source_public-property]( https://github.com/CSCD01/addons-server-team02/tree/12842-drop-is_source_public-property )
 
 1. `./src/olympia/addons/serializer.py`
 
@@ -440,7 +446,7 @@ User Acceptance test:
 8. Try to delete the group and confirm the deletion
 
 
-
+<a name="process"></a>
 ## Software Development Process
 
 During the working process of deliverable2, we used the Kanban board as our tool. We designed the board (refer to d1) with 6 columns, which included todo, in progress, code review1, code review2, QA testing, and done. The new tasks that needed to be done were placed in “to do.” Once a person picked up a task from “to do,” he/she assigned his/her name on that card and then switched the card into the next column “in progress.” However, when one of us selected the card in other columns, he/she assigned his/her name directly. After finishing one task, we unassigned our name on it and then moved it to the next block. Our rule was that one team member’s name could only appear twice at the same time(one is “in progress,” the other is in the blocks which are not “in progress”).
