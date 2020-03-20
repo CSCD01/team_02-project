@@ -56,11 +56,12 @@ In **ratings** app:
 
 - models.py:
 
-  This usage of this file is talking to the database. Because we are going to save and modify new data of the number of upvotes and downvotes, we need to change this file.
+  This usage of this file is talking to the database. Because we are going to create a new table including the information of the voters and reviewers, we need to change this file.
+
 
 - views.py:
 
-  This file already included who has the authority to send http methods. We need to create a new class to add a group of users to decide who can send http ‘patch’ method. Here is the code that to decide whether a user can send which kind of http method, which we can refer to:
+  This file already included who has the authority to send http methods. We need to create a new class to add a group of users to decide who can send http ‘post’ method. Here is the code that to decide whether a user can send which kind of http method, which we can refer to:
 
 ```python
 class RatingViewSet(AddonChildMixin, ModelViewSet):
@@ -91,6 +92,7 @@ class RatingViewSet(AddonChildMixin, ModelViewSet):
 - permissions.py:
 
   Since the role of this file is to judge whether a user can do some operations, we need to handle the authority of a user whether he/she could upvote or downvote of our new feature. For example, in this file, the following function handles whether or not the request user can delete a rating:
+
 
 ```python
 def user_can_delete_rating(request, rating):
@@ -123,11 +125,10 @@ def user_can_delete_rating(request, rating):
 
 - serializers.py:
 
-  The role of this file is to convert the gathered data from database to json and send it to frontend.
+  The role of this file is to convert the gathered data from database to json and send it to frontend. Since we will gather some voting value from the database, we need to modify it.
 
-- Models.py:
 
-  Similarly, since we are going to have new variables such as the number of upvotes or downvotes, we need to change this file.
+
 
 
 <a name="diagram1"></a>
@@ -326,7 +327,8 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 -d '{ "flag": "down_vote" }'
 ```
 
-#####
+
+
 
 
 <a name="changes"></a>
@@ -334,18 +336,21 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
 - In **models.py**:
 
-  We need to create a new class **RatingsVote**, similar to the original class **RatingFlag** in this file, we are going to create a new database table with some attributes which are used to record the voting operations to a review for a single user. The table includes **id, created, modified, vote_option, review_id and user_id**. Under models.py
+  We need to create a new class **RatingsVote**, similar to the original class **RatingFlag** in this file, we are going to create a new database table with some attributes which are used to record the voting operations to a review for a single user. The table includes **id, created, modified, vote_option, review_id and user_id**.
 
-  - new class **RatingsVote**
+  **models.py**
+  ```
+    \ new class RatingsVote
 
-    ​       **#** create a database table with following attributes
+    ​    # create a database table with following attributes
 
-    - new attribute): **id**
-    - new attribute: **created**
-    - new attribute: **modified**
-    - new attribute: **vote_option**
-    - new attribute: **review_id**
-    - new attribute: **user_id**
+        - new attribute): **id**
+        - new attribute: **created**
+        - new attribute: **modified**
+        - new attribute: **vote_option**
+        - new attribute: **review_id**
+        - new attribute: **user_id**
+    ```
 
 - In **permissions.py**:
 
@@ -357,13 +362,16 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
   3. If the vote has not been flagged, which means the user has not voted, the user can vote (each user can use only either upvote or downvote once).
 
-  Also, similar to class **CanDeleteRatingPermission**, we are going to create a new class **CanVotePermission** and define a function called **has_vote_permission**, which returns the result of the above function **user_can_vote_review**. Under permissions.py:
+  Also, similar to class **CanDeleteRatingPermission**, we are going to create a new class **CanVotePermission** and define a function called **has_vote_permission**, which returns the result of the above function **user_can_vote_review**.
 
-  - new function **user_can_vote_review(request**, **vote)**
+  **permissions.py**
+  ```
+     - new function user_can_vote_review(request**, **vote)
 
-  - new class **CanVotePermission**
+     \ new class CanVotePermission
 
-  - new method **has_vote_permission:** return **user_can_vote_review**
+        - new method has_vote_permission: return user_can_vote_review
+  ```
 
 - In **views.py**:
 
@@ -371,40 +379,48 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
   Besides, in this class(**RatingViewSet**), we are going to implement two new functions: one is **check_can_upvote_permission_for_ratings_list**, and the other is **check_can_downvote_permission_for_ratings_list** which are used to check whether or not the current request contains a user that can upvote or downvote.
 
-  Another new function we will implement is **vote**, which is used to check whether a user has been voted or not, and based on the previous voting action, we will give a corresponding response (just like the original function **flag** in line 352). Ynder views.py:
+  Another new function we will implement is **vote**, which is used to check whether a user has been voted or not, and based on the previous voting action, we will give a corresponding response (just like the original function **flag** in line 352).
 
-  ​    class **RatingViewSet**
+  **views.py**
+  ```
+  ​ \ class RatingViewSet
 
-  - new variable: **vote_permission_classes = [**
+        - new variable: vote_permission_classes = [
 
-  ​    **ByHttpMethod({'post': CanVotePermission }),**
+  ​                        ByHttpMethod({'post': CanVotePermission }),
 
-    **]**
+                        ]
 
-  - new method **check_can_upvote_permission_for_ratings_list**
-  - new method **check_can_downvote_permission_for_ratings_list**
+        - new method check_can_upvote_permission_for_ratings_list
 
-  - new method **vote**
+        - new method check_can_downvote_permission_for_ratings_list
+
+        - new method vote
+  ```
 
 - In **serializers.py**:
 
   Under the existence class **BaseRatingSerializer** and its inside class **Meta**, we need to add two more fields in the variable **field**, which should get from the database (‘upvote’, ‘downvote’). Besides, we need a new class **RatingVoteSerializer**, which is used to validate the availability and also convert it to JSON.
 
+  **serializers.py**
+  ```
 
+    \ class BaseRatingSerializer
 
-  serializers.py
+  ​  \ class Meta
 
-    \ class **BaseRatingSerializer**
-
-  ​    \ class **Meta**
-
-  ​      variable **fields** = (... ,‘upvote’, ‘downvote’ ...)
+  ​      - variable **fields** = (... ,‘upvote’, ‘downvote’ ...)
 
     \ new class **RatingVoteSerializer**
 
-  - new function **to_representation**
+        - new function to_representation
 
-  new function **validate**
+        - new function validate
+  ```
+
+
+
+
 
 <a name="acceptance"></a>
 ## Acceptance test
