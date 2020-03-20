@@ -468,3 +468,5 @@ Picture is  too big…[click here to look closer](https://github.com/CSCD01/team
 
 
 From the ER table we can tell how each model interacts with others. There are two main entities(tables) in the database: UserProfile and Addon. Many other entities uses one or many fields in these two entities as foriegner key. We are planning to create a new entity for the Issue we choose in this deliverable, the entity would include fields like user id, addon id, voting flag, etc, within these fields, user id and addon id would be foreigner keys that inherited from UserProfile and Addon.
+
+Compared with our previous understanding that we demonstrated in deliverable 1, now we are more clear about the flow of the life cycle. We believe we would be able to move forward to implement the new API.
