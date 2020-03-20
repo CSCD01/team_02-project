@@ -144,7 +144,7 @@ def user_can_delete_rating(request, rating):
 
 
 <a name="issue2"></a>
-## Issue2 [#12790 VALIDATE LINE NUMBER IN DRAFT COMMENTS API](https://github.com/mozilla/addons-server/issues/12790)
+## Issue2 [#12790 Validate Line Number In Draft Comments API](https://github.com/mozilla/addons-server/issues/12790)
 
 <a name="description2"></a>
 #### Description
@@ -431,25 +431,25 @@ Since this new voting feature implementation does not include front-end elements
 
 2. When the user is logged-in (in curl or Postman requesting case, it means with authentication token) and a **upvote request** is sent,
 
-3. 1. if the user is the author of the add-on, a 403 response should be returned
+   1. if the user is the author of the add-on, a 403 response should be returned
 
    2. if the user is the author of the rating, a 403 response should be returned
 
    3. if the user is neither the author of the add-on nor the author of the rating and
 
-   4. 1. the user did not vote for the rating, then the request should successfully go through and a 200 response with upvoting data increased by 1 should be returned
+      1. the user did not vote for the rating, then the request should successfully go through and a 200 response with upvoting data increased by 1 should be returned
       2. the user voted for the rating as upvote before, then the request should successfully go through and a 200 response with upvoting data decreased by 1 should be returned (meaning undo upvote)
       3. the user voted for the rating as downvote before, then the request should successfully go through and a 200 response with upvoting data increased by 1 and downvoting data decreased by 1 should be returned (meaning change downvote to upvote)
 
 4. When the user is logged-in (in curl or Postman requesting case, it means no authentication token) and a **downvote request** is sent,
 
-5. 1. if the user is the author of the add-on, a 403 response should be returned
+   1. if the user is the author of the add-on, a 403 response should be returned
 
    2. if the user is the author of the rating, a 403 response should be returned
 
    3. if the user is neither the author of the add-on nor the author of the rating and
 
-   4. 1. the user did not vote for the rating, then the request should successfully go through and a 200 response with downvoting data increased by 1 should be returned
+      1. the user did not vote for the rating, then the request should successfully go through and a 200 response with downvoting data increased by 1 should be returned
       2. the user voted for the rating as downvote before, then the request should successfully go through and a 200 response with downvoting data decreased by 1 should be returned (meaning undo downvote)
       3. the user voted for the rating as upvote before, then the request should successfully go through and a 200 response with downvoting data increased by 1 and upvoting data decreased by 1 should be returned (meaning change upvote to downvote)
 
