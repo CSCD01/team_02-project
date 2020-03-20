@@ -231,7 +231,7 @@ To add validation to the create comment POST request, we probably need these fil
 
 Activity app:
 
-![](/Users/samuel/IdeaProjects/team_02-project/pic/activity.png)
+![](./pic/activity.png)
 
 
 
