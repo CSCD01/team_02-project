@@ -132,11 +132,11 @@ def user_can_delete_rating(request, rating):
 
 
 <a name="diagram1"></a>
-#### UML/ER diagrams to illustrate interactions between new and existing codes
+#### UML/ER diagrams of existing codes
 
 ##### Ratings app:
 
-![](./pic/ratings.png)
+![](./pic/uml_ratings_original.jpg)
 
 
 
@@ -227,9 +227,9 @@ To add validation to the create comment POST request, we probably need these fil
   ```
 
 <a name="diagram2"></a>
-#### UML/ER diagrams to illustrate interactions between new and existing codes
+#### UML/ER diagrams of existing codes
 
-Activity app:
+##### Activity app:
 
 ![](./pic/activity.png)
 
@@ -369,10 +369,10 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
         - new method: set
     ```
     **UML**
-    ![](./pic/)
+    ![](./pic/uml_models.jpg)
 
     **ER**
-    ![](./pic/)
+    ![](./pic/er_ratings.png)
 
 
 - In **permissions.py**:
@@ -397,7 +397,7 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
   ```
 
   **UML**
-  ![](./pic/)
+  ![](./pic/uml_permissions.jpg)
 
 
 - In **views.py**:
@@ -425,7 +425,7 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
         - new method vote
   ```
   **UML**
-  ![](./pic/)
+  ![](./pic/uml_views.jpg)
 
 
 - In **urls.py**:
@@ -464,6 +464,8 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
           - fields = (‘vote’, ‘rating’, ‘user’)
 
+      - new method __init__
+
       - new method validate_vote
 
       - new method validate
@@ -472,7 +474,7 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
   ```
 
   **UML**
-  ![](./pic/)
+  ![](./pic/uml_serializers.jpg)
 
 
 
