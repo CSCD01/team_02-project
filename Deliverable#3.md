@@ -428,6 +428,21 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
   ![](./pic/)
 
 
+- In **urls.py**:
+
+  In the variable urlpatterns, we should add one new URL, which is used to handle the URL of voting.
+
+  **urls.py**
+  ```
+  	variable urlpatterns = [
+        ...
+  	    (r'^(?P<review_id>\d+)/vote/$', frontend_view, name='addons.ratings.vote),
+  	    ...
+      ]
+  ```
+
+
+
 - In **serializers.py**:
 
   We need to create a new class called **RatingVoteSerializer**, which is used to gather required voting data from the database and give it to the frontend. In this class, we need to create variables **vote**, **rating**, **user**, which hold the data fetched corresponding values in the database table. Also, we need some new methods. 1. **validate_vote** is to ensure the value of the vote option field in the database can either be upvote or downvote. 2. **validate** is to ensure voting only applies on reviews with text. 3. **save** is to save the values into the database. (the whole process is similar to line 230-271)
