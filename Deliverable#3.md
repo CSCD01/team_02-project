@@ -35,14 +35,15 @@ To implement this voting feature, it would require modifications on both the fro
 
 2. The logged-in users should be able to upvote or downvote at most once for each reviews if
 
-3. - they are not the author of the review they want vote for, and
-   - they are not the author of the addon that the review belongs to
+  - they are not the author of the review they want vote for, and
 
-4. The logged-in users should be able to undo and change their voting choices.
+  - they are not the author of the addon that the review belongs to
 
-5. Ratings with no helpfulness votes have a helpfulness of 0.
+3. The logged-in users should be able to undo and change their voting choices.
 
-6. The rest have a helpfulness of *(helpful votes) - (non-helpful votes)*.
+4. Ratings with no helpfulness votes have a helpfulness of 0.
+
+5. The rest have a helpfulness of *(helpful votes) - (non-helpful votes)*.
 
 
 <a name="file1"></a>
