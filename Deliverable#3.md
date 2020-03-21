@@ -336,21 +336,44 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
 - In **models.py**:
 
-  We need to create a new class **RatingsVote**, similar to the original class **RatingFlag** in this file, we are going to create a new database table with some attributes which are used to record the voting operations to a review for a single user. The table includes **id, created, modified, vote_option, review_id and user_id**.
+  We need to create a new class **RatingVote**, similar to the original class **RatingFlag** in this file, we are going to create a new database table with some attributes which are used to record the voting operations to a review for a single user. The table includes **id**, **created**, **modified**, **vote_option**, **review_id** and **user_id**. Besides, we need to create a new class **GroupedVoting** which is used to count upvote and downvote.(similar to 318-391)
 
   **models.py**
   ```
     \ new class RatingsVote
 
-    ​    # create a database table with following attributes
+        - new variable: UPVOTE
 
-        - new attribute): **id**
-        - new attribute: **created**
-        - new attribute: **modified**
-        - new attribute: **vote_option**
-        - new attribute: **review_id**
-        - new attribute: **user_id**
+        - new variable: DOWNVOTE
+
+        - new variable: VOTES
+
+    ​    # create a database table with following attributes
+        - new attribute): id
+        - new attribute: created
+        - new attribute: modified
+        - new attribute: vote_option
+        - new attribute: review_id
+        - new attribute: user_id
+
+    \ new class GroupedVoting
+
+        - new variable: prefix
+
+        - new method: key
+
+        - new method: delete
+
+        - new method: get
+
+        - new method: set
     ```
+    **UML**
+    ![](./pic/)
+
+    **ER**
+    ![](./pic/)
+
 
 - In **permissions.py**:
 
@@ -366,12 +389,16 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
   **permissions.py**
   ```
-     - new function user_can_vote_review(request**, **vote)
+     - new function user_can_vote_review(request, vote)
 
      \ new class CanVotePermission
 
         - new method has_vote_permission: return user_can_vote_review
   ```
+
+  **UML**
+  ![](./pic/)
+
 
 - In **views.py**:
 
@@ -397,26 +424,40 @@ http://localhost:3000/api/v5/ratings/rating/89/votes\
 
         - new method vote
   ```
+  **UML**
+  ![](./pic/)
+
 
 - In **serializers.py**:
 
-  Under the existence class **BaseRatingSerializer** and its inside class **Meta**, we need to add two more fields in the variable **field**, which should get from the database (‘upvote’, ‘downvote’). Besides, we need a new class **RatingVoteSerializer**, which is used to validate the availability and also convert it to JSON.
+  We need to create a new class called **RatingVoteSerializer**, which is used to gather required voting data from the database and give it to the frontend. In this class, we need to create variables **vote**, **rating**, **user**, which hold the data fetched corresponding values in the database table. Also, we need some new methods. 1. **validate_vote** is to ensure the value of the vote option field in the database can either be upvote or downvote. 2. **validate** is to ensure voting only applies on reviews with text. 3. **save** is to save the values into the database. (the whole process is similar to line 230-271)
 
   **serializers.py**
   ```
 
-    \ class BaseRatingSerializer
+    \ new class RatingVoteSerializer
 
-  ​  \ class Meta
+      - new variable: vote
 
-  ​      - variable **fields** = (... ,‘upvote’, ‘downvote’ ...)
+      - new variable: rating
 
-    \ new class **RatingVoteSerializer**
+      - new variable: user
 
-        - new function to_representation
+      \ new subclass Meta:
 
-        - new function validate
+          - model = RatingVote
+
+          - fields = (‘vote’, ‘rating’, ‘user’)
+
+      - new method validate_vote
+
+      - new method validate
+
+      - new method save
   ```
+
+  **UML**
+  ![](./pic/)
 
 
 
