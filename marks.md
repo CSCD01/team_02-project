@@ -83,3 +83,32 @@
 
 **Total (10)**: 9   
 **Comments**: Not all members knew the bug, and therefore explanation was not great. Not everyone knows how the project is tested  
+
+-----------------
+
+### Deliverable 3
+
+| Criteria | Grade |
+| :-------: | :-----: |
+| Issue Description (10) |  |  
+| Implementation Plans (10) |  |  
+| Test (5) |  |  
+| Architecture (10) |  |
+| Presentation (10) |  |  
+
+**Total (45)**:   
+**Comments**:   
+
+### Interview 3
+
+| Question | Grade |
+| :-------: | :-----: |
+| First Feature (2) | 2 |  
+| Second Feature (2) | 2 |  
+| Explain Reasoning (1) | 1 |  
+| Testing (2) | 2 |  
+| Architecture (3) | 3 |  
+
+**Total (10)**: 10   
+**Comments**:   
+
