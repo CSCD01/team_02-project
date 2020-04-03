@@ -62,11 +62,11 @@
 | Choice of bugs (5) | 5 |  
 | Correctness (25) | 17 |  
 | Documentation (10) | 10 |
-| Test Suite (10) | 0 | 
+| Test Suite (10) | 5 | 
 | Software Process (25) | 25 |
 | Presentation (15) | 15 |
 
-**Total (100)**: 82  
+**Total (100)**: 87  
 **Comments**: #12842 need to fix lint issues to have checks pass and project maintainer said it was wrong. #13508 needed testing. The deliverable was written very well, and great job explaining how the kanban board was used and issues faced.  
 
 ### Interview 2
