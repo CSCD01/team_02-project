@@ -3,7 +3,7 @@
 ### Deliverable 0
 
 | Criteria | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Intro Team (5) | 3 | 
 | Intro Members (12) | 12 |  
 | Agreement (6) | 6 |  
@@ -16,7 +16,7 @@
 ### Interview 0
 
 | Question | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Intro Team (2) | 2  |
 | Agreement (2) | 2 |
 | Choosing Project (2) | 2 |  
@@ -31,7 +31,7 @@
 ### Deliverable 1
 
 | Criteria | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Architecture (15) | 0 |  
 | Software Process (15) | 15 |  
 | Presentation (10) | 10 |  
@@ -42,7 +42,7 @@
 ### Interview 1
 
 | Question | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Overall (2) | 0 |  
 | 2 Components (2) | 0 |  
 | Cool (2) | 1 |  
@@ -57,7 +57,7 @@
 ### Deliverable 2
 
 | Criteria | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Bugs Intro (10) | 10 |  
 | Choice of bugs (5) | 5 |  
 | Correctness (25) | 17 |  
@@ -72,7 +72,7 @@
 ### Interview 2
 
 | Question | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Summary (1) | 1 |  
 | Demo 1 (2) | 2 |  
 | Explain 1 (1) | 0 |  
@@ -89,14 +89,14 @@
 ### Deliverable 3
 
 | Criteria | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | Issue Description (10) | 10 |  
 | Implementation Plans (10) | 10 |  
 | Test (5) | 5 |  
 | Architecture (10) | 3 |
 | Presentation (10) | 10 |  
 
-**Total (45)**:   
+**Total (45)**: 38   
 **Comments**: Significant imporvement on architecture diagrams from deliverable 1, well done. But this deliverable needed to go into more depth about the archtiecture. It should've also talked about the following:
 
 ```txt
@@ -116,7 +116,7 @@
 ### Interview 3
 
 | Question | Grade |
-| :-------: | :-----: |
+| :------- | :-----: |
 | First Feature (2) | 2 |  
 | Second Feature (2) | 2 |  
 | Explain Reasoning (1) | 1 |  
