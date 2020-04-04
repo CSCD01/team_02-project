@@ -90,14 +90,28 @@
 
 | Criteria | Grade |
 | :-------: | :-----: |
-| Issue Description (10) |  |  
-| Implementation Plans (10) |  |  
-| Test (5) |  |  
-| Architecture (10) |  |
-| Presentation (10) |  |  
+| Issue Description (10) | 10 |  
+| Implementation Plans (10) | 10 |  
+| Test (5) | 5 |  
+| Architecture (10) | 3 |
+| Presentation (10) | 10 |  
 
 **Total (45)**:   
-**Comments**:   
+**Comments**: Significant imporvement on architecture diagrams from deliverable 1, well done. But this deliverable needed to go into more depth about the archtiecture. It should've also talked about the following:
+
+```txt
+-- architectural style; architectural pattern if applicable
+-- description of all components
+-- description of interfaces between components
+-- discussion of level of coupling between components
+-- discussion of cohesion of components
+-- how are each of the following addressed with architectural choices (if applicable)
+   -- performance
+   -- security
+   -- safety
+   -- availability
+   -- maintainability
+```
 
 ### Interview 3
 
