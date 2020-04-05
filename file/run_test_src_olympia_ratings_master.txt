@@ -1,0 +1,306 @@
+======================================================================
+ERROR: test_can_delete_with_admin_advanced_permission (olympia.ratings.tests.test_admin.TestRatingAdmin)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 20, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "/deps/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/deps/lib/python3.6/site-packages/django/db/models/query.py", line 408, in get
+    self.model._meta.object_name
+olympia.users.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_admin.py", line 140, in test_can_delete_with_admin_advanced_permission
+    self.client.login(email=user.email)
+  File "/deps/lib/python3.6/site-packages/django/test/client.py", line 602, in login
+    user = authenticate(**credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/__init__.py", line 73, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 24, in authenticate
+    UserModel().set_password(password)
+  File "/code/src/olympia/users/models.py", line 548, in set_password
+    raise NotImplementedError('cannot set password')
+NotImplementedError: cannot set password
+
+======================================================================
+ERROR: test_can_not_access_detail_without_ratings_moderate_permission (olympia.ratings.tests.test_admin.TestRatingAdmin)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 20, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "/deps/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/deps/lib/python3.6/site-packages/django/db/models/query.py", line 408, in get
+    self.model._meta.object_name
+olympia.users.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_admin.py", line 115, in test_can_not_access_detail_without_ratings_moderate_permission
+    self.client.login(email=user.email)
+  File "/deps/lib/python3.6/site-packages/django/test/client.py", line 602, in login
+    user = authenticate(**credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/__init__.py", line 73, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 24, in authenticate
+    UserModel().set_password(password)
+  File "/code/src/olympia/users/models.py", line 548, in set_password
+    raise NotImplementedError('cannot set password')
+NotImplementedError: cannot set password
+
+======================================================================
+ERROR: test_can_not_delete_without_admin_advanced_permission (olympia.ratings.tests.test_admin.TestRatingAdmin)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 20, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "/deps/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/deps/lib/python3.6/site-packages/django/db/models/query.py", line 408, in get
+    self.model._meta.object_name
+olympia.users.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_admin.py", line 124, in test_can_not_delete_without_admin_advanced_permission
+    self.client.login(email=user.email)
+  File "/deps/lib/python3.6/site-packages/django/test/client.py", line 602, in login
+    user = authenticate(**credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/__init__.py", line 73, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 24, in authenticate
+    UserModel().set_password(password)
+  File "/code/src/olympia/users/models.py", line 548, in set_password
+    raise NotImplementedError('cannot set password')
+NotImplementedError: cannot set password
+
+======================================================================
+ERROR: test_detail (olympia.ratings.tests.test_admin.TestRatingAdmin)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 20, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "/deps/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/deps/lib/python3.6/site-packages/django/db/models/query.py", line 408, in get
+    self.model._meta.object_name
+olympia.users.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_admin.py", line 160, in test_detail
+    self.client.login(email=user.email)
+  File "/deps/lib/python3.6/site-packages/django/test/client.py", line 602, in login
+    user = authenticate(**credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/__init__.py", line 73, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 24, in authenticate
+    UserModel().set_password(password)
+  File "/code/src/olympia/users/models.py", line 548, in set_password
+    raise NotImplementedError('cannot set password')
+NotImplementedError: cannot set password
+
+======================================================================
+ERROR: test_list (olympia.ratings.tests.test_admin.TestRatingAdmin)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 20, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "/deps/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/deps/lib/python3.6/site-packages/django/db/models/query.py", line 408, in get
+    self.model._meta.object_name
+olympia.users.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_admin.py", line 48, in test_list
+    self.client.login(email=user.email)
+  File "/deps/lib/python3.6/site-packages/django/test/client.py", line 602, in login
+    user = authenticate(**credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/__init__.py", line 73, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 24, in authenticate
+    UserModel().set_password(password)
+  File "/code/src/olympia/users/models.py", line 548, in set_password
+    raise NotImplementedError('cannot set password')
+NotImplementedError: cannot set password
+
+======================================================================
+ERROR: test_queries (olympia.ratings.tests.test_admin.TestRatingAdmin)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 20, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "/deps/lib/python3.6/site-packages/django/db/models/manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/deps/lib/python3.6/site-packages/django/db/models/query.py", line 408, in get
+    self.model._meta.object_name
+olympia.users.models.UserProfile.DoesNotExist: UserProfile matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_admin.py", line 98, in test_queries
+    self.client.login(email=user.email)
+  File "/deps/lib/python3.6/site-packages/django/test/client.py", line 602, in login
+    user = authenticate(**credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/__init__.py", line 73, in authenticate
+    user = backend.authenticate(request, **credentials)
+  File "/deps/lib/python3.6/site-packages/django/contrib/auth/backends.py", line 24, in authenticate
+    UserModel().set_password(password)
+  File "/code/src/olympia/users/models.py", line 548, in set_password
+    raise NotImplementedError('cannot set password')
+NotImplementedError: cannot set password
+
+======================================================================
+ERROR: test_created (olympia.ratings.tests.test_models.TestRefreshTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 354, in setUp
+    assert self.get_bayesian_rating() == 0.0
+  File "/code/src/olympia/ratings/tests/test_models.py", line 358, in get_bayesian_rating
+    return qs.values_dict('bayesian_rating')[0]['bayesian_rating']
+  File "/code/src/olympia/amo/search.py", line 104, in __getitem__
+    return list(new)[0]
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_deleted (olympia.ratings.tests.test_models.TestRefreshTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 354, in setUp
+    assert self.get_bayesian_rating() == 0.0
+  File "/code/src/olympia/ratings/tests/test_models.py", line 358, in get_bayesian_rating
+    return qs.values_dict('bayesian_rating')[0]['bayesian_rating']
+  File "/code/src/olympia/amo/search.py", line 104, in __getitem__
+    return list(new)[0]
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_edited (olympia.ratings.tests.test_models.TestRefreshTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 354, in setUp
+    assert self.get_bayesian_rating() == 0.0
+  File "/code/src/olympia/ratings/tests/test_models.py", line 358, in get_bayesian_rating
+    return qs.values_dict('bayesian_rating')[0]['bayesian_rating']
+  File "/code/src/olympia/amo/search.py", line 104, in __getitem__
+    return list(new)[0]
+IndexError: list index out of range
+
+======================================================================
+FAIL: test_impala_reviews_link (olympia.ratings.tests.test_helpers.HelpersTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_helpers.py", line 76, in test_impala_reviews_link
+    'http://testserver/en-US/firefox/addon/xx/reviews/')
+AssertionError
+
+======================================================================
+FAIL: test_reviews_link (olympia.ratings.tests.test_helpers.HelpersTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_helpers.py", line 45, in test_reviews_link
+    'http://testserver/en-US/firefox/addon/xx/reviews/')
+AssertionError
+
+======================================================================
+FAIL: test_update_none (olympia.ratings.tests.test_models.TestGroupedRating)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 340, in test_update_none
+    assert GroupedRating.get(self.addon.pk, update_none=False) is None
+AssertionError
+
+======================================================================
+FAIL: test_creation_triggers_email_and_logging (olympia.ratings.tests.test_models.TestRatingModel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 214, in test_creation_triggers_email_and_logging
+    assert len(mail.outbox) == 1
+AssertionError
+
+======================================================================
+FAIL: test_reply_triggers_email_but_no_logging (olympia.ratings.tests.test_models.TestRatingModel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 235, in test_reply_triggers_email_but_no_logging
+    assert len(mail.outbox) == 1
+AssertionError
+
+======================================================================
+FAIL: test_soft_delete (olympia.ratings.tests.test_models.TestRatingModel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 36, in test_soft_delete
+    assert addon.average_rating == 4.0  # Has been computed after deletion.
+AssertionError
+
+======================================================================
+FAIL: test_undelete (olympia.ratings.tests.test_models.TestRatingModel)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_models.py", line 83, in test_undelete
+    self.test_soft_delete()
+  File "/code/src/olympia/ratings/tests/test_models.py", line 36, in test_soft_delete
+    assert addon.average_rating == 4.0  # Has been computed after deletion.
+AssertionError
+
+======================================================================
+FAIL: test_addon_rating_aggregates (olympia.ratings.tests.test_tasks.TestAddonRatingAggregates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.6/unittest/mock.py", line 1183, in patched
+    return func(*args, **keywargs)
+  File "/code/src/olympia/ratings/tests/test_tasks.py", line 69, in test_addon_rating_aggregates
+    assert addon.bayesian_rating == 1.9821428571428572
+AssertionError
+
+======================================================================
+FAIL: test_post_logged_in (olympia.ratings.tests.test_views.TestRatingViewSetPost)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_views.py", line 1365, in test_post_logged_in
+    assert len(mail.outbox) == 1
+AssertionError
+
+======================================================================
+FAIL: test_reply (olympia.ratings.tests.test_views.TestRatingViewSetReply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_views.py", line 1969, in test_reply
+    assert len(mail.outbox) == 1
+AssertionError
+
+======================================================================
+FAIL: test_reply_admin (olympia.ratings.tests.test_views.TestRatingViewSetReply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/code/src/olympia/ratings/tests/test_views.py", line 1945, in test_reply_admin
+    assert len(mail.outbox) == 1
+AssertionError
+
+----------------------------------------------------------------------
+Ran 177 tests in 281.960s
+
+FAILED (failures=11, errors=9)
