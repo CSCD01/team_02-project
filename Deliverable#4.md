@@ -7,7 +7,7 @@ Acceptance Test
         Curl command:
 
         ```
-        curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?addon=2&show_votes_for=1'
+        curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?show_votes_for=1'
         ```
 
         Response:
@@ -269,7 +269,7 @@ Acceptance Test
         curl command:
 
         ```
-        curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?addon=2&show_votes_for=daf'
+        curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?show_votes_for=daf'
         ```
 
         Response:
@@ -285,7 +285,7 @@ Acceptance Test
         Curl Command:
 
         ```
-        curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?addon=2&show_votes_for=0'
+        curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?show_votes_for=0'
         ```
 
         Response:
@@ -386,7 +386,7 @@ Acceptance Test
               First we can use send a get request to get the voting for the rating with id 6 using curl below:
 
               ```
-              curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?addon=2&show_votes_for=1'
+              curl --location --request GET 'http://olympia.test/api/v4/ratings/rating/6/?show_votes_for=1'
               ```
 
               and then we can see the response (notice that the upvote is 0 now):
