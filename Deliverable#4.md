@@ -45,7 +45,7 @@ Acceptance Test
        "reply":null,
        "version":null
     }
-    ```
+     ```
 
   2. When a user sends a get rating request with show vote option on (`show_votes_for = 1`), a detail of the specific addon(ex. add-on with id 2) should be returned
 
