@@ -13,39 +13,39 @@ Acceptance Test
      Response:
 
      ```json
-     {
-       "id":6,
-       "addon":{
-          "id":2,
-          "slug":"artisanal-salad",
-          "name":{
-             "en-US":"Artisanal Salad",
-             "es":"(español) Artisanal Salad",
-             "fr":"(français) Artisanal Salad"
-          },
-          "icon_url":"http://olympia.test/static/img/addon-icons/posts-64.png"
-       },
-       "body":"Test Review 1",
-       "created":"2020-03-20T21:36:32Z",
-       "votes":{
-          "upvote":0,
-          "downvote":1
-       },
-       "is_deleted":false,
-       "is_developer_reply":false,
-       "is_latest":true,
-       "previous_count":0,
-       "user":{
-          "id":10975,
-          "name":"testuser-sdeYbFa0E2cH@example.com",
-          "url":null,
-          "username":"testuser-sdeYbFa0E2cH@example.com"
-       },
-       "score":1,
-       "reply":null,
-       "version":null
-    }
-     ```
+       {
+         "id":6,
+         "addon":{
+            "id":2,
+            "slug":"artisanal-salad",
+            "name":{
+               "en-US":"Artisanal Salad",
+               "es":"(español) Artisanal Salad",
+               "fr":"(français) Artisanal Salad"
+            },
+            "icon_url":"http://olympia.test/static/img/addon-icons/posts-64.png"
+         },
+         "body":"Test Review 1",
+         "created":"2020-03-20T21:36:32Z",
+         "votes":{
+            "upvote":0,
+            "downvote":1
+         },
+         "is_deleted":false,
+         "is_developer_reply":false,
+         "is_latest":true,
+         "previous_count":0,
+         "user":{
+            "id":10975,
+            "name":"testuser-sdeYbFa0E2cH@example.com",
+            "url":null,
+            "username":"testuser-sdeYbFa0E2cH@example.com"
+         },
+         "score":1,
+         "reply":null,
+         "version":null
+      }
+    ```
 
   2. When a user sends a get rating request with show vote option on (`show_votes_for = 1`), a detail of the specific addon(ex. add-on with id 2) should be returned
 
