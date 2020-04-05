@@ -318,8 +318,8 @@ Acceptance Test
        "score":1,
        "reply":null,
        "version":null
-    }
-    ```
+     }
+     ```
 
 2. Test POST Requests
 
