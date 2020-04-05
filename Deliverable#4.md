@@ -1,6 +1,44 @@
-Acceptance Test
+# CSCD01 PROJECT DELIVERABLE#4
 
-1. Test GET Requests
+## **Table of Contents**
+
+1. **[Design Of Feature](#feature)**
+2. **[User Guide](#guide)**
+3. **[Design Of Code](#code)**
+4. **[Acceptance Test](#acceptance)**
+
+   - [Test GET Requests](#testget)
+
+   - [Test POST Requests](#testpost)
+5. **[Unit Test](#unit)**
+
+
+
+<a name="feature"></a>
+
+## Design Of Feature
+
+
+
+<a name="guide"></a>
+
+## User Guide
+
+
+
+<a name="code"></a>
+
+## Design Of Code
+
+
+
+<a name="acceptance"></a>
+
+## Acceptance Test
+
+<a name="testget"></a>
+
+1. #### Test GET Requests
 
      1. When a user sends get rating request with show vote option on (`show_votes_for = 1`), a detail of the specific rating(ex. rating with id 6, add-on with id 2) should be returned
 
@@ -321,7 +359,9 @@ Acceptance Test
         }
         ```
 
-2. Test POST Requests
+<a name="testpost"></a>
+
+2. #### Test POST Requests
 
      1. When the user is not logged-in (in curl or Postman requesting case, it means no authentication token), if the user tries to vote for a rating (ex. rating with id 6, vote with upvote), a 401 unauthorization response should be returned.
 
@@ -1084,3 +1124,8 @@ Acceptance Test
              ```
 
    
+
+<a name="unit"></a>
+
+## Unit Test
+
