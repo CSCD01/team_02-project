@@ -24,13 +24,67 @@
 
 ## Design Of Feature
 
+### Overview
+
+Add-on rating is one of the most important features of AMO. For each add-on on the Mozilla Add-on Market, user reviews are displayed on the All Review section, however, currently there is no API supporting users to upvote/downvote a review, thus our team would implement the voting API, which allows users to target the most useful review more easily. 
+
+### Goals
+
+Implement an API that allows users to vote for a review as helpful or not.Users could not vote for their own review, nor their own add-on(s). 
+
+### API calls
+
+##### POST /api/v4/ratings/rating/(*int:* *id*)
+
+| Endpoint | What it does                                                 |
+| -------- | ------------------------------------------------------------ |
+| /vote    | This endpoint allows you to vote an existing rating by its id, upon success, a rating object will be returned (https://addons-server.readthedocs.io/en/latest/topics/api/ratings.html#rating-detail-object ) |
+
+
+
+##### GET /api/v4/ratings/rating/
+
+| Endpoint       | What it does                                                 |
+| -------------- | ------------------------------------------------------------ |
+| /(*int:* *id*) | This endpoint allows you to get a vote status for an existing voting by its id, upon success, a rating object will be returned (https://addons-server.readthedocs.io/en/latest/topics/api/ratings.html#rating-detail-object ) |
+
+
+
+### Fields reference
+
+##### Request
+
+| Field Name     | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| id             | Int representation for a specific voting                     |
+| addon          | Int representation for a specific addon                      |
+| show_votes_for | Integer representation<br/>0: don’t show detail for voting<br/>1: show counts for upvote and downvote |
+|                |                                                              |
+
+##### Respond 
+
+| Field Name | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| id         | Id for a rating vote                                         |
+| addon      | Foreign key representing an addon id                         |
+| rating     | Foreign key representing an rating id                        |
+| user       | Foreign key representing an user id                          |
+| created    | Time stamp shows when this vote is created                   |
+| modified   | Time stamp indicates the last modification                   |
+| vote       | Integer representation for a vote<br/>0: downvote<br/>1: upvote<br/>-1: not voted |
+
 
 
 <a name="guide"></a>
 
 ## User Guide
 
+#### Step 1: prepare the environment
 
+1. Clone the code from our team repo(https://github.com/CSCD01/addons-server-team02)
+2. Install with docker(https://addons-server.readthedocs.io/en/latest/topics/install/docker.html)
+3. Add 127.0.0.1 olympia.test to /etc/hosts/ in order to have proper CSS applied on the local build, /etc/hosts need to be modified before the actual running (sudo need to be applied for editing /etc/hosts/)
+4. On the web browser, visit localhost:3000, which will automatically redirect you to http://olympia.test/en-US/firefox/ 
 
 <a name="code"></a>
 
