@@ -329,7 +329,7 @@ Step 3: make API call
     --form 'vote=0'
     ```
     2. A Json object should be return and contain the following:
-		```json
+    ```json
     {
        "vote":0,
        "rating":{
@@ -377,7 +377,7 @@ Step 3: make API call
           "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
        }
     }
-		```
+    ```
 4. Change from downvote to upvote
 	1. Execute the api
 	```
