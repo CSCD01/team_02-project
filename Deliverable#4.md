@@ -24,6 +24,55 @@
 
 ## Design Of Feature
 
+### Overview
+
+Add-on rating is one of the most important features of AMO. For each add-on on the Mozilla Add-on Market, user reviews are displayed on the All Review section, however, currently there is no API supporting users to upvote/downvote a review, thus our team would implement the voting API, which allows users to target the most useful review more easily.
+
+### Goals
+
+Implement an API that allows users to vote for a review as helpful or not.Users could not vote for their own review, nor their own add-on(s).
+
+### API calls
+
+##### POST /api/v4/ratings/rating/(*int:* *id*)
+
+| Endpoint | What it does                                                 |
+| -------- | ------------------------------------------------------------ |
+| /vote    | This endpoint allows you to vote an existing rating by its id, upon success, a rating object will be returned (https://addons-server.readthedocs.io/en/latest/topics/api/ratings.html#rating-detail-object ) |
+
+
+
+##### GET /api/v4/ratings/rating/
+
+| Endpoint       | What it does                                                 |
+| -------------- | ------------------------------------------------------------ |
+| /(*int:* *id*) | This endpoint allows you to get a vote status for an existing voting by its id, upon success, a rating object will be returned (https://addons-server.readthedocs.io/en/latest/topics/api/ratings.html#rating-detail-object ) |
+
+
+
+### Fields reference
+
+##### Request
+
+| Field Name     | Description                                                  |
+| -------------- | ------------------------------------------------------------ |
+| id             | Int representation for a specific voting                     |
+| addon          | Int representation for a specific addon                      |
+| show_votes_for | Integer representation<br/>0: don’t show detail for voting<br/>1: show counts for upvote and downvote |
+|                |                                                              |
+
+##### Respond
+
+| Field Name | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| id         | Id for a rating vote                                         |
+| addon      | Foreign key representing an addon id                         |
+| rating     | Foreign key representing an rating id                        |
+| user       | Foreign key representing an user id                          |
+| created    | Time stamp shows when this vote is created                   |
+| modified   | Time stamp indicates the last modification                   |
+| vote       | Integer representation for a vote<br/>0: downvote<br/>1: upvote<br/>-1: not voted |
+
 
 
 <a name="guide"></a>
@@ -35,27 +84,27 @@ Step 1: prepare the environment
 - Clone the code from our team repo(https://github.com/CSCD01/addons-server-team02)
 - Install with docker(https://addons-server.readthedocs.io/en/latest/topics/install/docker.html)
 - Add `127.0.0.1 olympia.test` to `/etc/hosts/` in order to have proper CSS applied on the local build, `/etc/hosts` need to be modified before the actual running (sudo need to be applied for editing `/etc/hosts/`)
-- On the web browser, visit `localhost:3000`, which will automatically redirect you to http://olympia.test/en-US/firefox/ 
+- On the web browser, visit `localhost:3000`, which will automatically redirect you to http://olympia.test/en-US/firefox/
 
 ![](./pic/ug_step1.png)
 
 Step 2: grant access token, the easier way to get the authentication is through frontend(https://addons-server.readthedocs.io/en/latest/topics/api/v3_legacy/auth.html)
 
 - On the top right corner, register/log in
-- Upon successful login, open the web inspector. In the Network section, inspect the endpoint /api/v3/accounts/authenticate/. The token is available in the cookie called frontend_auth_token 
+- Upon successful login, open the web inspector. In the Network section, inspect the endpoint /api/v3/accounts/authenticate/. The token is available in the cookie called frontend_auth_token
 
 ![](./pic/ug_step2.png)
 
-Step 3: make API call   
+Step 3: make API call
 
 *below we’re using a mock Bearer token, while users should create their own Bearer token by following step 2*
 
-1. Upvote an review 
+1. Upvote an review
 
-   1. Execute the api 
+   1. Execute the api
     ```
    curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/10/vote/?lang=en-CA&wrap_outgoing_links=true' \
-   --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \ 
+   --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
    --header 'Cookie: multidb_pin_writes=y' \
    --form 'vote=1'
     ```
@@ -161,8 +210,8 @@ Step 3: make API call
 }
 ```
 
-2. Downvote an review 
-   1. Execute the api 
+2. Downvote an review
+   1. Execute the api
 
 ```
 curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
@@ -274,7 +323,7 @@ curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote
 ```
 
 3. Change from upvote to downvote
-    1. Execute the api 
+    1. Execute the api
     ```
     curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
     --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
@@ -332,7 +381,7 @@ curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote
 }
 		```
 4. Change from downvote to upvote
-	1. Execute the api 
+	1. Execute the api
 	```
 	curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
 	--header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
@@ -390,7 +439,7 @@ curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote
 }
 	```
 5. Undo a vote by sending the upvote/downvote request twice
-   1. Execute the api 
+   1. Execute the api
    ```
    curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
    --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
@@ -450,7 +499,6 @@ curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote
 	```
 
 
-
 <a name="code"></a>
 
 ## Design Of Code
@@ -474,7 +522,7 @@ curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote
         ```
 
         Response:
-        
+
         ```json
         {
           "id":6,
@@ -1548,13 +1596,13 @@ curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote
              }
              ```
 
-   
+
 
 <a name="unit"></a>
 
 ## Unit Test
 
-Since we added new codes and modified some of the existing codes in models.py, serializers.py, permissions.py, and views.py, we added our unit test suites to the corresponding test files: test_models.py, test_serializers.py, test_permissions.py, and test_views.py. In addition to the unit test suite for the new functional code for the voting API, we also modified some of the existing test cases to adapt the new configurations or attributes we added for implementing the voting API. Below is an overview of the test suite we added or modified in each corresponding test file: 
+Since we added new codes and modified some of the existing codes in models.py, serializers.py, permissions.py, and views.py, we added our unit test suites to the corresponding test files: test_models.py, test_serializers.py, test_permissions.py, and test_views.py. In addition to the unit test suite for the new functional code for the voting API, we also modified some of the existing test cases to adapt the new configurations or attributes we added for implementing the voting API. Below is an overview of the test suite we added or modified in each corresponding test file:
 
 In **test_models.py**:
 
@@ -1594,7 +1642,7 @@ The full test execution results can be found here:
 
 Our **[Kanban Board]( https://trello.com/b/tX6AbRV4/addon-server )**
 
-Due to the limitation of time, and we expected the division of work to become more flexible, we still used Kanban as our development process in deliverable 4. Similar to the kanban board in deliverable 2, we kept 6 columns (ToDo, In Progress, Code Review1, Code Review2, QA Testing, and Done) with the following rules: 
+Due to the limitation of time, and we expected the division of work to become more flexible, we still used Kanban as our development process in deliverable 4. Similar to the kanban board in deliverable 2, we kept 6 columns (ToDo, In Progress, Code Review1, Code Review2, QA Testing, and Done) with the following rules:
 
 - Each one could take at most two tickets at the same time(one in ToDo/In Progress, the other one in the rest of the columns)
 - The person who implements codes / writes documentations could not do Code Review / QA Testing himself/herself
@@ -1614,4 +1662,3 @@ In addition, in the process of deliverable 4, we met some problems that we’ve 
 Another interesting thing we want to mention is that we added a ticket of fixing broken existing test cases in the middle of the development process of deliverable 4, for example, tickets like **Fixing broken test cases caused by introducing the new feature**. With the benefits of Kanban, we can easily add this new ticket as soon as we realize the necessity. The reason why we need this type of tickets was that some of the existing test cases would be broken as we added new functional code for the voting feature. Since some of the existing test cases were mocking objects with the original attributes, as we introduced new attributes to the same objects, these test cases may not work. This type of tickets allowed us to go through the existing test cases that could be affected by our new functional codes. As a result, we will not break the existing test cases and result in unnecessary work for the open-source community in the future.
 
 ![](./pic/dev_process_d4_2.png)
-
