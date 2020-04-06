@@ -530,7 +530,77 @@ Step 3: make API call
 
 ## Design Of Code
 
+Overall ER diagram: ![](./pic/ER_project_D4.png)
 
+Our implementation of the new feature involved following files:
+
+src->olympia->ratings->
+
+- models.py
+- serializers.py
+- views.py
+- permissions.py
+
+
+
+#### In **models.py**:
+
+#### <img src="./pic/ER_models_D4.png"  />
+
+<img src="./pic/uml_models_D4.png" style="zoom: 50%;" />
+
+Similar to the existing class **RatingFlag**, we created a new class called **RatingVote**. 
+
+Similar to the existing class **GroupedRating**, we created a new class called **GroupedVoting**.
+
+In the class `RatingVote`, we created a new table called `rating_vote` which has 4 main fields/columns: `review_id`(foreign key to table **Reviews**), `user_id`(foreign key to table **UserProfile**), `addon_id`(foreign key to table **Addons**) and `vote`(small integer field which only accepted 3 values: **-1**(cleaned vote), **0**(down vote),and **1**(up vote). This table is used to track the voting status of each review/rating under the corresponding addon for each authorized user.
+
+
+In this class, we made a few changes compared to our plan in deliverable 3. 
+
+- renamed the `vote_option` field to “vote”. 
+- made the “vote” field to store small integer values -1, 0, 1 instead of strings UPVOTE, DOWNVOTE.
+
+- added a new field “addon_id” as a foreign key to table **Addons**
+
+In the class **GroupedVoting**, we created it so that we could get the number of each upvote and downvote in the table **rating_vote** created in the class `RatingVote`. This class ran the “select count(vote)” query based on the specific addon_id and review_id. This class would be called by the method `get_votes` in **serializers.py** and return the number of upvotes and downvotes.
+
+#### In **serializers.py**:
+
+![](./pic/uml_serializers_D4.png)
+
+
+
+Similar to the existing class **RatingFlagSerializer**, we created a new class called **RatingVoteSerializer**. 
+
+This class is used to transfer the required voting data between the models.py(database) and the views.py. In this class, we created variables `vote`, `rating`, `user` and `addon`, which hold the data fetched corresponding values in the database table. Also, we added new methods. 
+
+1.  `validate_vote` is to ensure the value of the vote option field in the database can either be upvote or downvote. 
+2. `validate` is to ensure voting only applies on reviews with text. ` 
+3.  `save` is to save the values into the database.
+
+Besides, in the class `BaseRatingSerializer`, we added a new method called `get_votes`, which is similar to the method `get_flags`. This method was called by the method `should_include_votes` in **views.py.** This method would check if the GET request contains the keyword “show_votes_for”. If so, it would then check if there is a parameter called “addon” contained in this GET request. If so, it would show the list ratings of the given addon_id with “votes”(the number of upvotes and downvotes); otherwise, it would show the detailed rating with “votes”(the number of upvotes and downvotes). These were done by calling `GroupedVoting` class in **models.py**. This method would add the “votes” field into the response body of the current GET request if the parameter `show_votes_for=1`.
+In this serializers.py, we added the above new method `get_votes` which was not included in our plan in deliverable 3. Because during the planning, we only thought about the POST request and forgot about the GET request.
+
+#### In **views.py**:
+
+![](./pic/uml_views_D4.png)
+
+Similar to the existing method `should_include_flags`, we created a new method called `should_include_votes`. This method is used for handling GET requests passed to **view.py**. It checks whether the parameters contain the keyword “show_votes_for”. If so, it will call the method `get_votes` in **serializers.py** to modify the existing response.
+
+Similar to the existing method `check_can_reply_permission_for_ratings_list`, we created a new method called `check_can_vote_permission_for_ratings_list`. This method checks whether or not the current POST request contains an user that can vote to ratings we're about to return by calling the class `CanVoteRatingPermission` in **permissions.py**. It is used to populate the `can_vote` property in ratings list, when an addon is passed.
+
+Similar to the existing method **flag**, we created a new method called `vote`. This method is used for handling POST requests passed to **view.py.** This method will first check whether the current user is eligible to perform the POST request by calling the class `CanVoteRatingPermission` in **permissions.py**. If so, it will then check the data passed from the request. Depending on the value of the “vote” field, the method will call the class `RatingVoteSerializer` in **serializers.py** to save/update/reset the corresponding fields in the database. 
+
+In this **views.py**, we made a couple changes described above, which is quite different compared to our plan in deliverable 3. Because when planning, we didn’t think carefully about handling the GET requests. Besides, we have combined the permission checks for both upvote and downvote which is another difference compared to the plan. 
+
+
+
+In **permissions.py**:
+
+![](./pic/uml_permissions_D4.png)Similar to the existing class `CanDeleteRatingPermission`, we created a new class called `CanVoteRatingPermission` as planned in deliverable 3, which will be called by the method **vote** in **views.py**. Inside the class `CanVoteRatingPermission`, it will call the method `user_can_vote_rating`, which returns whether or not the request’s user can vote for a rating.
+
+In **urls.py**During the planning in deliverable 3, we mentioned that we were going to add a new URL in **urls.py**, which was used to handle the URL of voting. But indeed we were wrong. After carefully examining the existing code, we’ve found that we could simply do this task in **views.py**. We used the `@action` annotation with ‘post’ as the method to handle the POST requests and used the method `should_include_votes` to handle the GET requests.
 
 <a name="acceptance"></a>
 
