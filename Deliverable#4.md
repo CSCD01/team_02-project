@@ -437,64 +437,64 @@ Step 3: make API call
     }
     ```
 5. Undo a vote by sending the upvote/downvote request twice
-   1. Execute the api
-   ```
-   curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
-   --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
-   --header 'Cookie: multidb_pin_writes=y' \
-   --form 'vote=1'
-   ```
-   *undo a downvote: change vote=1 to vote=0*
-	2. A Json object should be return and contain the following:
-	```json
-  {
-     "vote":-1,
-     "rating":{
-        "id":6,
-        "addon":{
-           "id":2,
-           "slug":"tasty-stew",
-           "name":{
-              "en-US":"Tasty Stew",
-              "es":"(español) Tasty Stew",
-              "fr":"(français) Tasty Stew"
-           },
-           "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
-        },
-        "body":"Test Review 1",
-        "created":"2020-03-27T20:42:04Z",
-        "is_deleted":false,
-        "is_developer_reply":false,
-        "is_latest":true,
-        "previous_count":0,
-        "user":{
-           "id":10975,
-           "name":"testuser-oK0RCiveDX6o@example.com",
-           "url":"http://olympia.test/en-CA/firefox/user/10975/",
-           "username":"testuser-oK0RCiveDX6o@example.com"
-        },
-        "score":2,
-        "reply":null,
-        "version":null
-     },
-     "user":{
-        "id":1,
-        "name":"Firefox user 1",
-        "url":"http://olympia.test/en-CA/firefox/user/1/",
-        "username":"MonsterAlan"
-     },
-     "addon":{
-        "id":2,
-        "slug":"tasty-stew",
-        "name":{
-           "en-US":"Tasty Stew",
-           "es":"(español) Tasty Stew",
-           "fr":"(français) Tasty Stew"
-        },
-        "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
-     }
-  }
-	```
+     1. Execute the api
+     ```
+     curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
+     --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
+     --header 'Cookie: multidb_pin_writes=y' \
+     --form 'vote=1'
+     ```
+     *undo a downvote: change vote=1 to vote=0*
+    2. A Json object should be return and contain the following:
+    ```json
+    {
+       "vote":-1,
+       "rating":{
+          "id":6,
+          "addon":{
+             "id":2,
+             "slug":"tasty-stew",
+             "name":{
+                "en-US":"Tasty Stew",
+                "es":"(español) Tasty Stew",
+                "fr":"(français) Tasty Stew"
+             },
+             "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
+          },
+          "body":"Test Review 1",
+          "created":"2020-03-27T20:42:04Z",
+          "is_deleted":false,
+          "is_developer_reply":false,
+          "is_latest":true,
+          "previous_count":0,
+          "user":{
+             "id":10975,
+             "name":"testuser-oK0RCiveDX6o@example.com",
+             "url":"http://olympia.test/en-CA/firefox/user/10975/",
+             "username":"testuser-oK0RCiveDX6o@example.com"
+          },
+          "score":2,
+          "reply":null,
+          "version":null
+       },
+       "user":{
+          "id":1,
+          "name":"Firefox user 1",
+          "url":"http://olympia.test/en-CA/firefox/user/1/",
+          "username":"MonsterAlan"
+       },
+       "addon":{
+          "id":2,
+          "slug":"tasty-stew",
+          "name":{
+             "en-US":"Tasty Stew",
+             "es":"(español) Tasty Stew",
+             "fr":"(français) Tasty Stew"
+          },
+          "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
+       }
+    }
+    ```
 
 
 <a name="code"></a>
