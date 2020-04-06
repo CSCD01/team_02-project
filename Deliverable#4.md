@@ -59,7 +59,6 @@ Implement an API that allows users to vote for a review as helpful or not.Users 
 | id             | Int representation for a specific voting                     |
 | addon          | Int representation for a specific addon                      |
 | show_votes_for | Integer representation<br/>0: don’t show detail for voting<br/>1: show counts for upvote and downvote |
-|                |                                                              |
 
 ##### Respond
 
