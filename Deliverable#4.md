@@ -379,15 +379,15 @@ Step 3: make API call
     }
     ```
 4. Change from downvote to upvote
-	1. Execute the api
-	```
+  1. Execute the api
+  ```
 	curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
 	--header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
 	--header 'Cookie: multidb_pin_writes=y' \
 	--form 'vote=1'
-	```
-	2. A Json object should be return and contain the following:
-	```json
+  ```
+  2. A Json object should be return and contain the following:
+  ```json
   {
      "vote":1,
      "rating":{
@@ -435,7 +435,7 @@ Step 3: make API call
         "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
      }
   }
-	```
+  ```
 5. Undo a vote by sending the upvote/downvote request twice
    1. Execute the api
    ```
