@@ -444,7 +444,6 @@ Step 3: make API call
      --header 'Cookie: multidb_pin_writes=y' \
      --form 'vote=1'
      ```
-     *undo a downvote: change vote=1 to vote=0*
     2. A Json object should be return and contain the following:
     ```json
     {
