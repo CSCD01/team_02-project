@@ -6,9 +6,9 @@
 2. **[User Guide](#guide)**
 3. **[Design Of Code](#code)**
 4. **[Acceptance Test](#acceptance)**
-- [Test GET Requests](#testget)
+1. [Test GET Requests](#testget)
    
-- [Test POST Requests](#testpost)
+2. [Test POST Requests](#testpost)
 5. **[Unit Test](#unit)**
 6. **[Software Development Process](#process)**
 
