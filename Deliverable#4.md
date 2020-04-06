@@ -437,7 +437,7 @@ Step 3: make API call
     }
     ```
 5. Undo a vote by sending the upvote/downvote request twice
-     1. Execute the api
+     1. Execute the api    *undo a downvote: change vote=1 to vote=0*
      ```
      curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
      --header 'Authorization: Bearer eyJhdXRoX2hhc2giOiI5ZDZhNjgwMDRiODAyOTc1Nzg2ZmYwYTVmMmY0YzI5NDkyMDk3MTBjIiwidXNlcl9pZCI6MTEyMDN9:1jK9c6:WOLrKX0S_SSbwaRMBZcfBg6st-s' \
