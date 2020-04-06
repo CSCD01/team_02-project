@@ -3,19 +3,25 @@
 ## **Table of Contents**
 
 1. **[Design Of Feature](#feature)**
-
+   - [Overview](#overview)
+   - [Goals](#goals)
+   - [API Calls](#api)
+   - [Fields Reference](#fields)
 2. **[User Guide](#guide)**
-
+   - [Prepare the Environment](#prepare)
+   - [Authetication](#auth)
+   - [Make API Calls](#call)
+     - [Upvote A Rating](#upvote)
+     - [Downvote A Rating](#downvote)
+     - [Change Voting from Upvote to Downvote ](#change1)
+     - [Change Voting from Downvote to Upvote ](#change2)
+     - [Undo Voting](#undo)
 3. **[Design Of Code](#code)**
-
 4. **[Acceptance Test](#acceptance)**
-
    - [Test GET Requests](#testget)
 
    - [Test POST Requests](#testpost)
-
 5. **[Unit Test](#unit)**
-
 6. **[Software Development Process](#process)**
 
 
@@ -24,14 +30,17 @@
 
 ## Design Of Feature
 
+<a name="overview"></a>
 ### Overview
 
 Add-on rating is one of the most important features of AMO. For each add-on on the Mozilla Add-on Market, user reviews are displayed on the All Review section, however, currently there is no API supporting users to upvote/downvote a review, thus our team would implement the voting API, which allows users to target the most useful review more easily.
 
+<a name="goals"></a>
 ### Goals
 
 Implement an API that allows users to vote for a review as helpful or not.Users could not vote for their own review, nor their own add-on(s).
 
+<a name="api"></a>
 ### API calls
 
 ##### POST /api/v4/ratings/rating/(*int:* *id*)
@@ -48,7 +57,7 @@ Implement an API that allows users to vote for a review as helpful or not.Users 
 | -------------- | ------------------------------------------------------------ |
 | /(*int:* *id*) | This endpoint allows you to get a vote status for an existing voting by its id, upon success, a rating object will be returned (https://addons-server.readthedocs.io/en/latest/topics/api/ratings.html#rating-detail-object ) |
 
-
+<a name="fields"></a>
 
 ### Fields reference
 
@@ -78,6 +87,8 @@ Implement an API that allows users to vote for a review as helpful or not.Users 
 
 ## User Guide
 
+<a name="prepare"></a>
+
 Step 1: prepare the environment
 
 - Clone the code from our team repo(https://github.com/CSCD01/addons-server-team02)
@@ -87,6 +98,8 @@ Step 1: prepare the environment
 
 ![](./pic/ug_step1.png)
 
+<a name="auth"></a>
+
 Step 2: grant access token, the easier way to get the authentication is through frontend(https://addons-server.readthedocs.io/en/latest/topics/api/v3_legacy/auth.html)
 
 - On the top right corner, register/log in
@@ -94,11 +107,15 @@ Step 2: grant access token, the easier way to get the authentication is through 
 
 ![](./pic/ug_step2.png)
 
+<a name="call"></a>
+
 Step 3: make API call
 
 *below we’re using a mock Bearer token, while users should create their own Bearer token by following step 2*
 
-1. Upvote an review
+<a name="upvote"></a>
+
+1. Upvote a review
 
    1. Execute the api
     ```
@@ -209,7 +226,10 @@ Step 3: make API call
     }
     ```
 
+   <a name="downvote"></a>
+
 2. Downvote an review
+
    1. Execute the api
     ```
     curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
@@ -319,7 +339,10 @@ Step 3: make API call
     }
     ```
 
+   <a name="change1"></a>
+
 3. Change from upvote to downvote
+
     1. Execute the api
     ```
     curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
@@ -377,7 +400,11 @@ Step 3: make API call
        }
     }
     ```
+
+    <a name="change2"></a>
+
 4. Change from downvote to upvote
+
     1. Execute the api
     ```
     curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
@@ -435,7 +462,11 @@ Step 3: make API call
        }
     }
     ```
+
+    <a name="undo"></a>
+
 5. Undo a vote by sending the upvote/downvote request twice
+
      1. Execute the api    *undo a downvote: change vote=1 to vote=0*
      ```
      curl --location --request POST 'http://olympia.test/api/v4/ratings/rating/6/vote/?lang=en-CA&wrap_outgoing_links=true' \
@@ -443,56 +474,56 @@ Step 3: make API call
      --header 'Cookie: multidb_pin_writes=y' \
      --form 'vote=1'
      ```
-    2. A Json object should be return and contain the following:
-    ```json
-    {
-       "vote":-1,
-       "rating":{
-          "id":6,
-          "addon":{
-             "id":2,
-             "slug":"tasty-stew",
-             "name":{
-                "en-US":"Tasty Stew",
-                "es":"(español) Tasty Stew",
-                "fr":"(français) Tasty Stew"
-             },
-             "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
-          },
-          "body":"Test Review 1",
-          "created":"2020-03-27T20:42:04Z",
-          "is_deleted":false,
-          "is_developer_reply":false,
-          "is_latest":true,
-          "previous_count":0,
-          "user":{
-             "id":10975,
-             "name":"testuser-oK0RCiveDX6o@example.com",
-             "url":"http://olympia.test/en-CA/firefox/user/10975/",
-             "username":"testuser-oK0RCiveDX6o@example.com"
-          },
-          "score":2,
-          "reply":null,
-          "version":null
-       },
-       "user":{
-          "id":1,
-          "name":"Firefox user 1",
-          "url":"http://olympia.test/en-CA/firefox/user/1/",
-          "username":"MonsterAlan"
-       },
-       "addon":{
-          "id":2,
-          "slug":"tasty-stew",
-          "name":{
-             "en-US":"Tasty Stew",
-             "es":"(español) Tasty Stew",
-             "fr":"(français) Tasty Stew"
-          },
-          "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
-       }
-    }
-    ```
+     2. A Json object should be return and contain the following:
+     ```json
+     {
+        "vote":-1,
+        "rating":{
+           "id":6,
+           "addon":{
+              "id":2,
+              "slug":"tasty-stew",
+              "name":{
+                 "en-US":"Tasty Stew",
+                 "es":"(español) Tasty Stew",
+                 "fr":"(français) Tasty Stew"
+              },
+              "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
+           },
+           "body":"Test Review 1",
+           "created":"2020-03-27T20:42:04Z",
+           "is_deleted":false,
+           "is_developer_reply":false,
+           "is_latest":true,
+           "previous_count":0,
+           "user":{
+              "id":10975,
+              "name":"testuser-oK0RCiveDX6o@example.com",
+              "url":"http://olympia.test/en-CA/firefox/user/10975/",
+              "username":"testuser-oK0RCiveDX6o@example.com"
+           },
+           "score":2,
+           "reply":null,
+           "version":null
+        },
+        "user":{
+           "id":1,
+           "name":"Firefox user 1",
+           "url":"http://olympia.test/en-CA/firefox/user/1/",
+           "username":"MonsterAlan"
+        },
+        "addon":{
+           "id":2,
+           "slug":"tasty-stew",
+           "name":{
+              "en-US":"Tasty Stew",
+              "es":"(español) Tasty Stew",
+              "fr":"(français) Tasty Stew"
+           },
+           "icon_url":"http://olympia.test/static/img/addon-icons/webdev-64.png"
+        }
+     }
+     ```
 
 
 <a name="code"></a>
