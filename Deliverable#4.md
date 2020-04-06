@@ -218,7 +218,7 @@ Step 3: make API call
     --header 'Cookie: multidb_pin_writes=y' \
     --form 'vote=0'
     ```
-		2. A Json object should be return and contain the following:
+   2. A Json object should be return and contain the following:
     ```json
     {
        "vote":0,
