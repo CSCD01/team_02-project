@@ -126,3 +126,33 @@
 **Total (10)**: 10   
 **Comments**:   
 
+-----------------
+
+### Deliverable 4
+
+| Criteria | Grade |
+| :------- | :-----: |
+| Implementation (40) |  |  
+| Testing (20) |  |  
+| User Guide(s) (10) |  |  
+| Design Document (10) |  |
+| Process (20) |  |  
+| Compared with other teams (10) |  |  
+| Presentation (10) |  |  
+
+**Total (120)**:   
+**Comments**:   
+
+### Interview 4
+
+| Question | Grade |
+| :------- | :-----: |
+| Feature Description (2) | 2 |  
+| Technical Explanation (2) | 2 |  
+| Architecture (2) | 2 |  
+| Testing (2) | 2 |  
+| Software Process (2) | 2 |  
+
+**Total (10)**: 10   
+**Comments**:   
+
