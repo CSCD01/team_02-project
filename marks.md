@@ -136,16 +136,17 @@
 | Testing (20) | 20 | | 
 | User Guide(s) (10) | 10 | |  
 | Design Document (10) | 10 | | 
-| Process (20) | 15 |  | 
+| Process (20) | 10 |  | 
 | Compared with other teams (10) | ? | |   
 | Presentation (10) | 10 |  |
 
-**Total (120)**: 90 + ?      
+**Total (120)**: 85 + ?      
 **Comments**: Introduced new files to .gitignore, package-log.json is useful and should not be ignored.  
 src/olympia/ratings/views.py line # 157 does not need "is True".   
 I dont like {1: "up_vote", 0: "down_vote", -1: "cleaned_vote"}, I think {1: "up_vote", 0: "cleaned_vote", -1: "down_vote"} is more intuitive. No marks deducted for this.   
 Travis checks failed because of linting issues. Test case test_soft_delete in src/olympia/ratings/tests/test_models.py failed, but I think this was an existing issue in the project.    
 The maintainers should have been contacted before work was started on this issue. Unluckily, since this was not done, a maintainer closed this issue a day after the first commit for this issue was made by the team.     
+There is one proper pull request: https://github.com/CSCD01/addons-server-team02/pull/2 after that all commits seemed to be made directly to the main branch. On the pull request, all three coding members for this deliverable seemed to work at the same time. No marks deducted for this but in the future use the github features to do code reviews. Reviewers can be assigned top right corner of pull request page.
 
 
 ### Interview 4
