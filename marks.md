@@ -132,7 +132,7 @@
 
 | Criteria | Grade | Comments
 | :------- | :-----: | :------ | 
-| Implementation (40) | 25 | Full marks for correctness. Lost marks for quality of code. Main issues: linting caused Travis check to fail, issues with .gitignore |   
+| Implementation (40) | 28 | Full marks for correctness. Lost marks for quality of code. Main issues: linting caused Travis check to fail, issues with .gitignore |   
 | Testing (20) | 20 | | 
 | User Guide(s) (10) | 10 | |  
 | Design Document (10) | 10 | | 
@@ -140,7 +140,7 @@
 | Compared with other teams (10) | ? | |   
 | Presentation (10) | 10 |  |
 
-**Total (120)**: 85 + ?      
+**Total (120)**: 88 + ?      
 **Comments**: Introduced new files to .gitignore, package-log.json is useful and should not be ignored.  
 src/olympia/ratings/views.py line # 157 does not need "is True".   
 I dont like {1: "up_vote", 0: "down_vote", -1: "cleaned_vote"}, I think {1: "up_vote", 0: "cleaned_vote", -1: "down_vote"} is more intuitive. No marks deducted for this.   
