@@ -28,15 +28,15 @@
 
 ----------------
 
-### Deliverable 1
+### Deliverable 1 (Remarked)
 
 | Criteria | Grade |
 | :------- | :-----: |
-| Architecture (15) | 0 |  
+| Architecture (15) | 4 |  
 | Software Process (15) | 15 |  
 | Presentation (10) | 10 |  
 
-**Total (40)**: 25  
+**Total (40)**: 29  
 **Comments**:  Proper architecture diagram not present  
 
 ### Interview 1
@@ -130,18 +130,23 @@
 
 ### Deliverable 4
 
-| Criteria | Grade |
-| :------- | :-----: |
-| Implementation (40) |  |  
-| Testing (20) |  |  
-| User Guide(s) (10) |  |  
-| Design Document (10) |  |
-| Process (20) |  |  
-| Compared with other teams (10) |  |  
-| Presentation (10) |  |  
+| Criteria | Grade | Comments
+| :------- | :-----: | :------ | 
+| Implementation (40) | 25 | Full marks for correctness. Lost marks for quality of code. Main issues: linting caused Travis check to fail, issues with .gitignore |   
+| Testing (20) | 20 | | 
+| User Guide(s) (10) | 10 | |  
+| Design Document (10) | 10 | | 
+| Process (20) | 15 |  | 
+| Compared with other teams (10) | ? | |   
+| Presentation (10) | 10 |  |
 
-**Total (120)**:   
-**Comments**:   
+**Total (120)**: 90 + ?      
+**Comments**: Introduced new files to .gitignore, package-log.json is useful and should not be ignored.  
+src/olympia/ratings/views.py line # 157 does not need "is True".   
+I dont like {1: "up_vote", 0: "down_vote", -1: "cleaned_vote"}, I think {1: "up_vote", 0: "cleaned_vote", -1: "down_vote"} is more intuitive. No marks deducted for this.   
+Travis checks failed because of linting issues. Test case test_soft_delete in src/olympia/ratings/tests/test_models.py failed, but I think this was an existing issue in the project.    
+The maintainers should have been contacted before work was started on this issue. Unluckily, since this was not done, a maintainer closed this issue a day after the first commit for this issue was made by the team.     
+
 
 ### Interview 4
 
